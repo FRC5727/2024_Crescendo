@@ -12,14 +12,15 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.*;
-import frc.robot.subsystems.Swerve;
-import frc.robot.subsystems.TimerSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.LED;
-import frc.robot.subsystems.RobotPosition;
-import frc.robot.subsystems.ArmSubsystem;
-import frc.robot.subsystems.ArmSubsystem.Position;
+import frc.robot.Subsystems.Swerve;
+import frc.robot.oldcommands.*;
+import frc.robot.oldsubsystems.ArmSubsystem;
+import frc.robot.oldsubsystems.IntakeSubsystem;
+import frc.robot.oldsubsystems.LED;
+import frc.robot.oldsubsystems.RobotPosition;
+import frc.robot.oldsubsystems.TimerSubsystem;
+import frc.robot.oldsubsystems.ArmSubsystem.Position;
+
 import static frc.robot.Constants.*;
 
 /**

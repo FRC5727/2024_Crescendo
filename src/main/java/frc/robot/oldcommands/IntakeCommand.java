@@ -2,16 +2,16 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.oldcommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.oldsubsystems.IntakeSubsystem;
 
-public class IntakeForeverCommand extends CommandBase {
+public class IntakeCommand extends CommandBase {
   /** Creates a new IntakeCommand. */
   private final IntakeSubsystem intake;
 
-  public IntakeForeverCommand(IntakeSubsystem intake) {
+  public IntakeCommand(IntakeSubsystem intake) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.intake = intake;
     addRequirements(intake);
@@ -29,11 +29,16 @@ public class IntakeForeverCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) { }
+  public void end(boolean interrupted) {
+    // Don't bother stopping intake, because it'll just move to idle anyway
+    if (!interrupted) {
+      intake.flash();
+    }
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return intake.isStalled();
   }
 }

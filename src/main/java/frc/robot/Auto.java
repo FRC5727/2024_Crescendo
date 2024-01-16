@@ -21,9 +21,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
-import frc.robot.subsystems.ArmSubsystem.Position;
+import frc.robot.Subsystems.Swerve;
+import frc.robot.oldcommands.*;
+import frc.robot.oldsubsystems.*;
+import frc.robot.oldsubsystems.ArmSubsystem.Position;
 
 public class Auto {
     private final HashMap<String, Command> eventMap = new HashMap<>();
