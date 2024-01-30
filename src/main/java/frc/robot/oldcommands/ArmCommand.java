@@ -7,11 +7,11 @@ package frc.robot.oldcommands;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.oldsubsystems.ArmSubsystem;
 import frc.robot.oldsubsystems.ArmSubsystem.Position;
 
-public class ArmCommand extends CommandBase {
+public class ArmCommand extends Command {
   // Creates a new ArmCommand
   
   private final ArmSubsystem arm;

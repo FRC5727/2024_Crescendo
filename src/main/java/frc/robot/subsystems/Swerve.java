@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.Subsystems;
 
 import frc.robot.SwerveModule;
 import frc.lib.math.BetterSwerveModuleState;

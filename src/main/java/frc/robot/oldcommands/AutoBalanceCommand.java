@@ -8,11 +8,11 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.oldsubsystems.LED;
 
-public class AutoBalanceCommand extends CommandBase {
+public class AutoBalanceCommand extends Command {
   /** Creates a new AutoBalanceCommand. */
   private final Swerve s_Swerve;
   private final LED s_LED;
