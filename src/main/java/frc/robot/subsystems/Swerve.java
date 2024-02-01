@@ -139,9 +139,6 @@ public class Swerve extends SubsystemBase {
     public double getSpeedLimitRot() {
         return speedLimit ? Constants.Swerve.speedLimitRot : 1.0;
     }
-    public Rotation2d getGyroYaw() {
-        return Rotation2d.fromDegrees(gyro.getYaw().getValue());
-    }
     public Rotation2d getGyroPitch() {
         // The gyro is rotated 90 degrees, so the gyro roll is the robot pitch
         return Rotation2d.fromDegrees(gyro.getRoll().getValue());
