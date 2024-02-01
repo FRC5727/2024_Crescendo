@@ -126,9 +126,14 @@ public class Swerve extends SubsystemBase {
 
     public double getSpeedLimitXY() {
         return speedLimit ? Constants.Swerve.speedLimitXY : 1.0;
+
     }
     public void zeroHeading(){
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d(getPose().getTranslation(), new Rotation2d()));
+    }
+    
+    public Rotation2d getGyroYaw() {
+        return Rotation2d.fromDegrees(gyro.getYaw().getValue());
     }
 
     public double getSpeedLimitRot() {
