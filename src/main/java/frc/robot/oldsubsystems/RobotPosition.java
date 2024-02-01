@@ -39,12 +39,12 @@ public class RobotPosition extends SubsystemBase {
         this.s_Swerve = swerve;
 
         // The initial pose will be overridden later by the autonomous routine
-        swervePose = new SwerveDrivePoseEstimator(Constants.Swerve.swerveKinematics, s_Swerve.getYaw(), s_Swerve.getModulePositions(), new Pose2d());
+        swervePose = new SwerveDrivePoseEstimator(Constants.Swerve.swerveKinematics, s_Swerve.getGyroYaw(), s_Swerve.getModulePositions(), new Pose2d());
 
         Dashboard.watchBoolean("Position debug", positionDebug, (val) -> positionDebug = val.booleanValue());
         
         limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
-        botposeEntry = limelightTable.getEntry(DriverStation.getAlliance() == Alliance.Red ? "botpose_wpired" : "botpose_wpiblue");
+        botposeEntry = limelightTable.getEntry(DriverStation.getAlliance().get() == Alliance.Red ? "botpose_wpired" : "botpose_wpiblue");
         targetEntry = limelightTable.getEntry("tv");
         targetPoseEntry = limelightTable.getEntry("targetpose_cameraspace");
 
@@ -56,7 +56,7 @@ public class RobotPosition extends SubsystemBase {
     }
 
     public void resetPosition(Pose2d pose) {
-        swervePose.resetPosition(s_Swerve.getYaw(), s_Swerve.getModulePositions(), pose);
+        swervePose.resetPosition(s_Swerve.getGyroYaw(), s_Swerve.getModulePositions(), pose);
     }
 
     public void disableVision() {
@@ -77,7 +77,7 @@ public class RobotPosition extends SubsystemBase {
 
     @Override
     public void periodic() {
-        Pose2d robotPose = swervePose.update(s_Swerve.getYaw(), s_Swerve.getModulePositions());
+        Pose2d robotPose = swervePose.update(s_Swerve.getGyroYaw(), s_Swerve.getModulePositions());
 
         boolean haveTarget = targetEntry.getDouble(0) > 0;
         double[] llpose = botposeEntry.getDoubleArray(new double[7]);
