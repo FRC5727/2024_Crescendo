@@ -4,22 +4,25 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.Controls;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.oldcommands.*;
-import frc.robot.oldsubsystems.ArmSubsystem;
-import frc.robot.oldsubsystems.IntakeSubsystem;
-import frc.robot.oldsubsystems.LED;
+//import frc.robot.oldsubsystems.ArmSubsystem;
+//import frc.robot.oldsubsystems.IntakeSubsystem;
+//import frc.robot.oldsubsystems.LED;
 import frc.robot.oldsubsystems.RobotPosition;
 import frc.robot.oldsubsystems.TimerSubsystem;
-import frc.robot.oldsubsystems.ArmSubsystem.Position;
+//import frc.robot.oldsubsystems.ArmSubsystem.Position;
 
 import static frc.robot.Constants.*;
 
@@ -34,17 +37,17 @@ import static frc.robot.Constants.*;
  */
 public class RobotContainer {
   // Subsystems
-  private final LED s_LED = new LED();
-  private final IntakeSubsystem s_Intake = new IntakeSubsystem(s_LED);
-  private final ArmSubsystem s_Arm = new ArmSubsystem(s_LED, s_Intake);
+//  private final LED s_LED = new LED();
+//  private final IntakeSubsystem s_Intake = new IntakeSubsystem(s_LED);
+//  private final ArmSubsystem s_Arm = new ArmSubsystem(s_LED, s_Intake);
   private final Swerve s_Swerve = new Swerve();
   private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
-  private final Auto auto = new Auto(s_Arm, s_Intake, s_Swerve, s_RobotPosition, s_LED);
+//  private final Auto auto = new Auto(s_Arm, s_Intake, s_Swerve, s_RobotPosition, s_LED);
   private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
 
-  private Position driverTargetPosition = Position.CHASSIS;
+//  private Position driverTargetPosition = Position.CHASSIS;
 
-  private final SendableChooser<ArmSubsystem.Position> positionChooser = new SendableChooser<>();
+//  private final SendableChooser<ArmSubsystem.Position> positionChooser = new SendableChooser<>();
 
   // Drive Controls
   private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -62,22 +65,22 @@ public class RobotContainer {
             s_Swerve::getSpeedLimitXY,
             s_Swerve::getSpeedLimitRot
         ));
-    s_Intake.setDefaultCommand(Commands.startEnd(s_Intake::idle, () -> {}, s_Intake));
+//    s_Intake.setDefaultCommand(Commands.startEnd(s_Intake::idle, () -> {}, s_Intake));
     configureBindings();
 
     // Arm position chooser
-    positionChooser.setDefaultOption("--- Arm Direct Debug Positions ---", null);
-    for (Position pos : Position.values()) {
-      positionChooser.addOption(pos.toString(), pos);
-    }
-    SmartDashboard.putData("Position chooser", positionChooser);
+//    positionChooser.setDefaultOption("--- Arm Direct Debug Positions ---", null);
+//    for (Position pos : Position.values()) {
+//      positionChooser.addOption(pos.toString(), pos);
+//    }
+//    SmartDashboard.putData("Position chooser", positionChooser);
 
     // Easy way to test AutoBalance
-    SmartDashboard.putData("Auto-Balance", new AutoBalanceCommand(s_Swerve, s_LED));
+    //SmartDashboard.putData("Auto-Balance", new AutoBalanceCommand(s_Swerve, s_LED));
   }
 
   public Command getAutonomousCommand() {
-    return auto.getAutoCommand();
+    return null;//return auto.getAutoCommand();
   }
 
   /*
@@ -99,20 +102,20 @@ public class RobotContainer {
     /* DRIVER BINDS */
 
     // Driver arm controls
-    new JoystickButton(Controls.driver, XboxController.Button.kA.value)
+ /*  new JoystickButton(Controls.driver, XboxController.Button.kA.value)
       .onTrue(Commands.runOnce(() -> driverTargetPosition = Position.GRID_LOW));
     new JoystickButton(Controls.driver, XboxController.Button.kB.value)
       .onTrue(Commands.runOnce(() -> driverTargetPosition = Position.GRID_MID));
     new JoystickButton(Controls.driver, XboxController.Button.kY.value)
       .onTrue(Commands.runOnce(() -> driverTargetPosition = Position.GRID_HIGH));
-
+*/
     Trigger driverLeftBumper = new JoystickButton(Controls.driver, XboxController.Button.kLeftBumper.value);
     Trigger driverRightBumper = new JoystickButton(Controls.driver, XboxController.Button.kRightBumper.value);
     Trigger driverLeftTrigger = new Trigger(() -> Controls.driver.getLeftTriggerAxis() > Controls.triggerAxisThreshold);
     Trigger driverRightTrigger = new Trigger(() -> Controls.driver.getRightTriggerAxis() > Controls.triggerAxisThreshold);
   
     // Move to selected position
-    Trigger armTrigger = 
+/*    Trigger armTrigger = 
       driverRightBumper.whileTrue(
         Commands.runOnce(s_Swerve::enableSpeedLimit)
           .andThen(Commands.runOnce(() -> s_Arm.setTargetPosition(s_Arm.isDirectMode() ? positionChooser.getSelected() : driverTargetPosition)))
@@ -151,27 +154,11 @@ public class RobotContainer {
 
     // Toggle between cones and cubes
     new JoystickButton(Controls.driver, XboxController.Button.kX.value).onTrue(Commands.runOnce(() -> s_Intake.toggleCube()));
-
-    // Use D-Pad for manual motor control
-    new POVButton(Controls.driver, 0)
-      .whileTrue(Commands.startEnd(() -> s_Arm.upperArmDirect(Arm.manualVoltage), () -> s_Arm.upperArmDirect(0), s_Arm));
-    new POVButton(Controls.driver, 180)
-      .whileTrue(Commands.startEnd(() -> s_Arm.upperArmDirect(-Arm.manualVoltage), () -> s_Arm.upperArmDirect(0), s_Arm));
-    new POVButton(Controls.driver, 90)
-      .whileTrue(Commands.startEnd(() -> s_Arm.lowerArmDirect(Arm.manualVoltage), () -> s_Arm.lowerArmDirect(0), s_Arm));
-    new POVButton(Controls.driver, 270)
-      .whileTrue(Commands.startEnd(() -> s_Arm.lowerArmDirect(-Arm.manualVoltage), () -> s_Arm.lowerArmDirect(0), s_Arm));
-
-    SmartDashboard.putData("Zero Gyro", Commands.runOnce(s_Swerve::zeroGyro));
-  }
-
-  // TODO Replace this ugly hack
-  // For some reason, after auto, the teleop controls are inverted
-  public void hack() {
-    s_Swerve.hack();
+*/
+    SmartDashboard.putData("Zero Gyro", new InstantCommand(() -> s_Swerve.zeroHeading()));
   }
 
   public void disabled() {
-    s_Intake.disabled();
+ //   s_Intake.disabled();
   }
 }

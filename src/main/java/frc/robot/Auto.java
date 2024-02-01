@@ -1,5 +1,5 @@
 package frc.robot;
-
+/*
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -9,11 +9,14 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.pathplanner.lib.PathPlanner;
+import com.pathplanner.lib.auto.AutoBuilder;
+
+/* import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
-
+*/
+/* 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -25,10 +28,10 @@ import frc.robot.Subsystems.Swerve;
 import frc.robot.oldcommands.*;
 import frc.robot.oldsubsystems.*;
 import frc.robot.oldsubsystems.ArmSubsystem.Position;
-
+*/
 public class Auto {
-    private final HashMap<String, Command> eventMap = new HashMap<>();
-    private final SwerveAutoBuilder autoBuilder;
+ /* private final HashMap<String, Command> eventMap = new HashMap<>();
+    private final AutoBuilder autoBuilder;
 
     private final SendableChooser<String> pathChooser = new SendableChooser<>();
     private final SendableChooser<Boolean> pieceChooser = new SendableChooser<>();
@@ -196,5 +199,5 @@ public class Auto {
                 .map(name -> name.substring(0, name.lastIndexOf(".")))
                 .sorted()
                 .collect(Collectors.toList());
-    }
+    }*/
 }

@@ -1,12 +1,12 @@
 package frc.robot.oldsubsystems;
-
+/*
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.led.CANdle.LEDStripType;
-import com.ctre.phoenix.led.CANdle;
-import com.ctre.phoenix.led.LarsonAnimation;
-import com.ctre.phoenix.led.RainbowAnimation;
+import com.ctre.phoenix6.led.CANdle.LEDStripType;
+import com.ctre.phoenix6.led.CANdle;
+import com.ctre.phoenix6.led.LarsonAnimation;
+import com.ctre.phoenix6.led.RainbowAnimation;
 import com.ctre.phoenix.led.StrobeAnimation;
 
 import frc.robot.Constants;
@@ -142,4 +142,4 @@ public class LED extends SubsystemBase {
   public void flash(int count, Color color) {
     setStrobe(color, count);
   }
-}
+}*/

@@ -9,10 +9,11 @@ import java.util.Deque;
 import java.util.EnumMap;
 import java.util.Map;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.sensors.CANCoder;
-import com.pathplanner.lib.auto.PIDConstants;
+/*
+import com.ctre.phoenix6.motorcontrol.NeutralMode;
+import com.ctre.phoenix6.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix6.sensors.CANcoder;
+// import com.pathplanner.lib.auto.PIDConstants;
 
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -403,3 +404,4 @@ public class ArmSubsystem extends SubsystemBase {
     }
   }
 }
+*/
