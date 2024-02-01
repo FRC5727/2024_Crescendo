@@ -5,11 +5,11 @@
 package frc.robot.oldcommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.oldsubsystems.IntakeSubsystem;
+//import frc.robot.oldsubsystems.IntakeSubsystem;
 
 public class IntakeForeverCommand extends Command {
   /** Creates a new IntakeCommand. */
-  private final IntakeSubsystem intake;
+/*  private final IntakeSubsystem intake;
 
   public IntakeForeverCommand(IntakeSubsystem intake) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -35,5 +35,5 @@ public class IntakeForeverCommand extends Command {
   @Override
   public boolean isFinished() {
     return false;
-  }
+  }*/
 }

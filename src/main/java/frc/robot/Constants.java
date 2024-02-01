@@ -18,6 +18,16 @@ import frc.lib.util.SwerveModuleConstants;
 public final class Constants {
     public static final double stickDeadband = 0.1;
 
+    public static final String CANivoreName = "CANivore";
+
+    public static final int LED_CANDLE = 0; // Port for LED light
+
+    public static final class Controls {
+        public static final double stickDeadband = 0.10; // TODO We have used 0.05 previously
+        public static final double triggerAxisThreshold = 0.10; // Threshold to consider a trigger pulled
+        public static final XboxController driver = new XboxController(0);
+    }
+
     public static final class Swerve {
         public static final int pigeonID = 1;
 
@@ -47,6 +57,10 @@ public final class Constants {
 
         /* Angle Encoder Invert */
         public static final SensorDirectionValue cancoderInvert = chosenModule.cancoderInvert;
+
+        // Multipliers when speed limit is in effect;
+        public static final double speedLimitXY = 0.45;
+        public static final double speedLimitRot = 0.15;
 
         /* Swerve Current Limiting */
         public static final int angleCurrentLimit = 25;

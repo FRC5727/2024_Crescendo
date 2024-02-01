@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Swerve extends SubsystemBase {
+    public SwerveDriveOdometry swerveOdometry;
     public static boolean swerveDebug = false;
     private boolean speedLimit = false;
 
@@ -104,6 +105,10 @@ public class Swerve extends SubsystemBase {
         return swerveOdometry.getPoseMeters();
     }
 
+    public Rotation2d getHeading(){
+        return getPose().getRotation();
+    }
+
     public void setPose(Pose2d pose) {
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
     }
@@ -114,6 +119,7 @@ public class Swerve extends SubsystemBase {
 
     public void disableSpeedLimit() {
         speedLimit = false;
+    }
     public void setHeading(Rotation2d heading){
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d(getPose().getTranslation(), heading));
     }
@@ -121,6 +127,7 @@ public class Swerve extends SubsystemBase {
     public double getSpeedLimitXY() {
         return speedLimit ? Constants.Swerve.speedLimitXY : 1.0;
 
+    }
     public void zeroHeading(){
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d(getPose().getTranslation(), new Rotation2d()));
     }
@@ -131,8 +138,13 @@ public class Swerve extends SubsystemBase {
 
     public double getSpeedLimitRot() {
         return speedLimit ? Constants.Swerve.speedLimitRot : 1.0;
+    }
     public Rotation2d getGyroYaw() {
         return Rotation2d.fromDegrees(gyro.getYaw().getValue());
+    }
+    public Rotation2d getGyroPitch() {
+        // The gyro is rotated 90 degrees, so the gyro roll is the robot pitch
+        return Rotation2d.fromDegrees(gyro.getRoll().getValue());
     }
 
     public void resetModulesToAbsolute(){
@@ -145,12 +157,12 @@ public class Swerve extends SubsystemBase {
     public void periodic() {
         if (swerveDebug) {
             for (SwerveModule mod : mSwerveMods) {
-                SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
+                SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCANcoder().getDegrees());
                 SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
                 SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
             }
-            SmartDashboard.putNumber("Gyro Angle", getYaw().getDegrees());
-            SmartDashboard.putNumber("Robot Pitch", getPitch());
+            SmartDashboard.putNumber("Gyro Angle", getGyroYaw().getDegrees());
+            SmartDashboard.putNumber("Robot Pitch", getGyroPitch().getDegrees());
             // SmartDashboard.putNumber("Gyro Roll", gyro.getRoll());
         }
     }

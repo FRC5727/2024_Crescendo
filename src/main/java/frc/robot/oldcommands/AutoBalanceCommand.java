@@ -1,7 +1,7 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
+/*
 package frc.robot.oldcommands;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -13,7 +13,7 @@ import frc.robot.Subsystems.Swerve;
 import frc.robot.oldsubsystems.LED;
 
 public class AutoBalanceCommand extends Command {
-  /** Creates a new AutoBalanceCommand. */
+  /** Creates a new AutoBalanceCommand. *//*
   private final Swerve s_Swerve;
   private final LED s_LED;
   private final PIDController m_PID = new PIDController(0.02, 0, 0);
@@ -93,3 +93,4 @@ public class AutoBalanceCommand extends Command {
     return false;
   }
 }
+*/
