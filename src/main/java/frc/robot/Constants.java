@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -97,6 +100,16 @@ public final class Constants {
         /* Swerve Profiling Values */
         /** Meters per Second */
         public static final double maxSpeed = 4.5; //TODO: This must be tuned to specific robot
+        
+    public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
+      new PIDConstants(5.0, 0, 0), // Translation constants 
+      new PIDConstants(5.0, 0, 0), // Rotation constants 
+      maxSpeed, 
+      .5*Math.sqrt(Math.pow(trackWidth, 2)+Math.pow(wheelBase, 2)),
+    
+      //flModuleOffset.getNorm(), // Drive base radius (distance from center to furthest module) 
+      new ReplanningConfig()
+    );
         /** Radians per Second */
         public static final double maxAngularVelocity = 10.0; //TODO: This must be tuned to specific robot
 
