@@ -1,0 +1,99 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.0,
+        "y": 7.0
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.0,
+        "y": 6.5
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.589245811403013,
+        "y": 5.923163238731541
+      },
+      "prevControl": {
+        "x": 4.180906462655018,
+        "y": 6.0519276700317315
+      },
+      "nextControl": {
+        "x": 7.53978001626889,
+        "y": 5.744825945348094
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.038862077724155,
+        "y": 3.5123318854232646
+      },
+      "prevControl": {
+        "x": 7.942401312167465,
+        "y": 4.735490440894139
+      },
+      "nextControl": {
+        "x": 3.9837568282731484,
+        "y": -0.6234908672348992
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.1056738569173326,
+        "y": 3.1382373650823254
+      },
+      "prevControl": {
+        "x": 4.2633836565141525,
+        "y": 0.39427389614272945
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.5500000000000003,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Launch_1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

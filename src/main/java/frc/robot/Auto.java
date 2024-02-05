@@ -44,7 +44,8 @@ public class Auto {
     }
 
     private final SortedMap<String, AutoConfig> quickpicks = new TreeMap<>(Map.ofEntries(
-        //Map.entry("[Clear-Y] 2 HH + balance [outer]", new AutoConfig("SS-PlaceCone,pick,place,balance", false, Position.GRID_HIGH, Position.GRID_HIGH, Position.NONE)),
+    //    Map.entry("[Clear-Y] 2 HH + balance [outer]", new AutoConfig("SS-PlaceCone,pick,place,balance")),
+      //  Map.entry("[Clear-Y] 2 HH + balance [outer]", new AutoConfig("SS-PlaceCone,pick,place,balance")),
     ));
 
     public Auto(Swerve s_Swerve, RobotPosition s_RobotPosition) {

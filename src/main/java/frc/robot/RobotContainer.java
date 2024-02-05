@@ -42,7 +42,7 @@ public class RobotContainer {
 //  private final ArmSubsystem s_Arm = new ArmSubsystem(s_LED, s_Intake);
   private final Swerve s_Swerve = new Swerve();
   private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
-//  private final Auto auto = new Auto(s_Arm, s_Intake, s_Swerve, s_RobotPosition, s_LED);
+  private final Auto auto = new Auto(s_Swerve, s_RobotPosition);
   private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
 
 //  private Position driverTargetPosition = Position.CHASSIS;
@@ -80,7 +80,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return null;//return auto.getAutoCommand();
+    return auto.getAutoCommand();
   }
 
   /*
