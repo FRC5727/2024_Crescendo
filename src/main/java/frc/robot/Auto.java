@@ -1,28 +1,4 @@
 package frc.robot;
-//theirs
-import com.pathplanner.lib.commands.*;
-import com.pathplanner.lib.path.PathConstraints;
-import com.pathplanner.lib.util.GeometryUtil;
-import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
-import com.pathplanner.lib.util.ReplanningConfig;
-import edu.wpi.first.math.Vector;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.numbers.N2;
-import edu.wpi.first.math.numbers.N3;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.function.BooleanSupplier;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.JSONObject;
-
-
 //End of theirs
 import java.io.File;
 import java.util.HashMap;
@@ -88,7 +64,7 @@ public class Auto {
         quickChooser.addOption("--- Auto Quick Pick ---", null);
         quickChooser.setDefaultOption("Manual selection", null);
         for (String name : quickpicks.keySet()) {
-          quickChooser.addOption(name, buildCommand(quickpicks.get(name)));
+          quickChooser.addOption(name, AutoBuilder.buildAuto(name));
         }
         SmartDashboard.putData("Quick Picks", quickChooser);
     }
@@ -107,11 +83,11 @@ public class Auto {
         if (config == null || config.path == null)
             return null;
 
-        List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup(config.path, PathPlanner.getConstraintsFromPath(config.path));
+        List<PathPlannerPath> pathGroup = PathPlannerAuto.getPathGroupFromAutoFile(config.path);
         return Commands.runOnce(() -> {
             DriverStation.reportWarning("Running auto command built from path: " + config.path, false);
             activeConfig = config;
-        }).andThen(AutoBuilder.fullAuto(pathGroup));
+        }).andThen(AutoBuilder.buildAuto(activeConfig.path));
     }
 
     private static List<String> getPathnames() {
