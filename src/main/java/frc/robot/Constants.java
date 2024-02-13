@@ -209,4 +209,8 @@ public static final class Mod3 {
       {6, 0.3, 0.3, 60}
     };
   }
+
+  public static int leftClimberMotorPort = 8;
+
+  public static int rightClimberMotorPort = 9;
 }
