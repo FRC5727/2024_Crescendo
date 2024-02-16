@@ -83,15 +83,16 @@ public class Auto {
         if (config == null || config.path == null)
             return null;
 
-        List<PathPlannerPath> pathGroup = PathPlannerAuto.getPathGroupFromAutoFile(config.path);
+        // List<PathPlannerPath> pathGroup = PathPlannerAuto.getPathGroupFromAutoFile(config.path);
+        activeConfig = config;
         return Commands.runOnce(() -> {
             DriverStation.reportWarning("Running auto command built from path: " + config.path, false);
             activeConfig = config;
-        }).andThen(AutoBuilder.buildAuto(activeConfig.path));
+        }).andThen(AutoBuilder.followPath(PathPlannerPath.fromPathFile(activeConfig.path)));
     }
 
     private static List<String> getPathnames() {
-        return Stream.of(new File(Filesystem.getDeployDirectory(), "pathplanner").listFiles())
+        return Stream.of(new File(Filesystem.getDeployDirectory(), "pathplanner/paths").listFiles())
                 .filter(file -> !file.isDirectory())
                 .filter(file -> file.getName().matches(".*\\.path"))
                 .map(File::getName)
