@@ -58,9 +58,9 @@ public class RobotContainer {
     s_Swerve.setDefaultCommand(
         new TeleopSwerve(
             s_Swerve,
-            () -> -Controls.driver.getRawAxis(translationAxis),
-            () -> -Controls.driver.getRawAxis(strafeAxis),
-            () -> -Controls.driver.getRawAxis(rotationAxis),
+            () -> Controls.driver.getRawAxis(translationAxis),
+            () -> Controls.driver.getRawAxis(strafeAxis),
+            () -> Controls.driver.getRawAxis(rotationAxis),
             () -> false, // always field relative
             s_Swerve::getSpeedLimitXY,
             s_Swerve::getSpeedLimitRot
