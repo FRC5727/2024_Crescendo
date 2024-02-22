@@ -4,14 +4,68 @@
 
 package frc.robot.Commands;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import com.ctre.phoenix6.configs.Pigeon2Configuration;
+import com.ctre.phoenix6.hardware.Pigeon2;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Subsystems.Climber;
 public class ClimberCommand extends Command {
   /** Creates a new ClimberCommand. */
-  public ClimberCommand() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  static final double kBalanceAngleThresholdDegrees = 2;
+  Climber climber;
+  public ClimberCommand(Climber climber)
+  {
+    this.climber = climber;
   }
 
+public void operatorControl(Translation2d translation,) {
+  //maybe add more like translation2d to translation, eg for gyroscope. their gyro is ahrs or smth
+    while (isOperatorControl() && isEnabled()) {
+
+        double xAxisRate            = translation.getX(); 
+        double yAxisRate            = translation.getY();
+        double rollAngleDegrees    = climber.getTilt();
+        //was stick and ahrs
+        boolean autoBalanceXMode;
+        boolean autoBalanceYmode;
+
+        if double rollAngleDegrees = 0; 
+        if ( !autoBalanceXMode && 
+             (Math.abs(rollAngleDegrees) >= 
+              Math.abs(kOffBalanceAngleThresholdDegrees))) {
+            autoBalanceXMode = true;
+        }
+        else if ( autoBalanceXMode && 
+                  (Math.abs(rollAngleDegrees) <= 
+                   Math.abs(kOonBalanceAngleThresholdDegrees))) {
+            autoBalanceXMode = false;
+        }
+        if ( !autoBalanceYMode && 
+             (Math.abs(rollAngleDegrees) >= 
+              Math.abs(kOffBalanceAngleThresholdDegrees))) {
+            autoBalanceYMode = true;
+        }
+        else if ( autoBalanceYMode && 
+                  (Math.abs(rollAngleDegrees) <= 
+                   Math.abs(kOonBalanceAngleThresholdDegrees))) {
+            autoBalanceYMode = false;
+        }
+        
+        // Control drive system automatically, 
+        // driving in reverse direction of pitch/roll angle,
+        // with a magnitude based upon the angle
+        
+        if ( autoBalanceXMode ) {
+            double pitchAngleRadians = pitchAngleDegrees * (Math.PI / 180.0);
+            xAxisRate = Math.sin(pitchAngleRadians) * -1;
+        }
+      
+        }
+    // Use addRequirements() here to declare subsystem dependencies.
+  }
+ 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
@@ -29,4 +83,5 @@ public class ClimberCommand extends Command {
   public boolean isFinished() {
     return false;
   }
+}
 }
