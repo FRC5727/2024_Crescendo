@@ -8,7 +8,6 @@ import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -16,6 +15,10 @@ import frc.robot.Constants;
 public class Climber extends SubsystemBase {
   private TalonFX leftClimberMotor;
   private TalonFX rightClimberMotor;
+
+  private double maxRotations;
+  private double currentRotationsL, currentRotationsR;
+
   private Pigeon2 gyro;
 
   /** Creates a new ClimberSubsystem. */
@@ -26,6 +29,10 @@ public class Climber extends SubsystemBase {
     gyro = new Pigeon2(Constants.Swerve.pigeonID, Constants.CANivoreName);
     gyro.getConfigurator().apply(new Pigeon2Configuration());
     gyro.setYaw(0);
+
+    maxRotations = 0;
+    currentRotationsL = 0;
+    currentRotationsR = 0;
   }
 
   public double getTilt() {
@@ -39,7 +46,8 @@ public class Climber extends SubsystemBase {
     rightClimberMotor.getStatorCurrent();
   }
 
-  public void moveLeft(double speed){
+  public void moveLeft(double speed)
+  {
     leftClimberMotor.setControl(new DutyCycleOut(speed * 1.0));
   }
   public void moveRight(double speed){

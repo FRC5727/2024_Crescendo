@@ -4,75 +4,90 @@
 
 package frc.robot.Commands;
 
-import com.ctre.phoenix6.configs.Pigeon2Configuration;
-import com.ctre.phoenix6.hardware.Pigeon2;
-
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants;
 import frc.robot.Subsystems.Climber;
 public class ClimberCommand extends Command {
   /** Creates a new ClimberCommand. */
   static final double kBalanceAngleThresholdDegrees = 2;
-  Climber climber;
+  static final double speed = 0.1;
+  private Climber climber;
+  private int mode; // 0 -> start, 1 -> extend, 2 -> retract & level
+
   public ClimberCommand(Climber climber)
   {
     this.climber = climber;
-  }
-
-public void operatorControl(Translation2d translation,) {
-  //maybe add more like translation2d to translation, eg for gyroscope. their gyro is ahrs or smth
-    while (isOperatorControl() && isEnabled()) {
-
-        double xAxisRate            = translation.getX(); 
-        double yAxisRate            = translation.getY();
-        double rollAngleDegrees    = climber.getTilt();
-        //was stick and ahrs
-        boolean autoBalanceXMode;
-        boolean autoBalanceYmode;
-
-        if double rollAngleDegrees = 0; 
-        if ( !autoBalanceXMode && 
-             (Math.abs(rollAngleDegrees) >= 
-              Math.abs(kOffBalanceAngleThresholdDegrees))) {
-            autoBalanceXMode = true;
-        }
-        else if ( autoBalanceXMode && 
-                  (Math.abs(rollAngleDegrees) <= 
-                   Math.abs(kOonBalanceAngleThresholdDegrees))) {
-            autoBalanceXMode = false;
-        }
-        if ( !autoBalanceYMode && 
-             (Math.abs(rollAngleDegrees) >= 
-              Math.abs(kOffBalanceAngleThresholdDegrees))) {
-            autoBalanceYMode = true;
-        }
-        else if ( autoBalanceYMode && 
-                  (Math.abs(rollAngleDegrees) <= 
-                   Math.abs(kOonBalanceAngleThresholdDegrees))) {
-            autoBalanceYMode = false;
-        }
-        
-        // Control drive system automatically, 
-        // driving in reverse direction of pitch/roll angle,
-        // with a magnitude based upon the angle
-        
-        if ( autoBalanceXMode ) {
-            double pitchAngleRadians = pitchAngleDegrees * (Math.PI / 180.0);
-            xAxisRate = Math.sin(pitchAngleRadians) * -1;
-        }
-      
-        }
-    // Use addRequirements() here to declare subsystem dependencies.
+    this.mode = 0;
+    addRequirements(climber);
   }
  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
+  // Get the current height of the left arm
+  public double leftArmHeight()
+  {
+    return 0;
+  }
+  // Get the current height of the left arm
+  public double rightArmHeight()
+  {
+    return 0;
+  }
+  public void setMode(int mode)
+  {
+    this.mode = mode;
+  }
+  public void toggleMode()
+  {
+    mode += 1;
+    if (mode == 3)
+      mode = 0;
+  }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute()
+  {
+    switch (mode)
+    {
+    case 0: // Retract maximally, for startup
+      if (Math.min(leftArmHeight(), rightArmHeight()) > 0)
+      // Not far enough retracted, retract both equally
+      {
+        climber.move(-speed);
+      } 
+      break;
+    case 1: // Extend maximally
+    if (Math.min(leftArmHeight(), rightArmHeight()) < Constants.maxClimberHeight)
+      // Not far enough retracted, retract both equally
+      {
+        climber.move(-speed);
+      } 
+      break;
+    case 2: // Extend and level
+        double rollAngleDegrees = climber.getTilt();
+
+      if (Math.min(leftArmHeight(), rightArmHeight()) > Constants.minimumClimberHeight)
+      // Not far enough retracted, retract both equally
+      {
+
+      }
+      else if (rollAngleDegrees > kBalanceAngleThresholdDegrees)
+      // Tilted to the left, retract the left arm more
+      {
+        
+      }
+      else if (rollAngleDegrees < -kBalanceAngleThresholdDegrees)
+      // Tilted to the right, retract the right arm more
+      {
+
+      }
+      else // Done
+        climber.move(0);
+      break;
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -83,5 +98,4 @@ public void operatorControl(Translation2d translation,) {
   public boolean isFinished() {
     return false;
   }
-}
 }

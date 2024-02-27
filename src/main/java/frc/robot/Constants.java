@@ -31,6 +31,13 @@ public final class Constants {
         public static final XboxController driver = new XboxController(0);
     }
 
+    /* Climber Motor PID Values */
+        public static final double climberKP = 1;
+        public static final double climberKI = 0;
+        public static final double climberKD = 0;
+
+    public static final double minimumClimberHeight = 1;
+    public static final double maxClimberHeight = 4;
     public static final class Swerve {
         public static final int pigeonID = 0;
 
@@ -87,7 +94,7 @@ public final class Constants {
         public static final double angleKD = chosenModule.angleKD;
 
         /* Drive Motor PID Values */
-        public static final double driveKP = 0.06; //TODO: This must be tuned to specific robot
+        public static final double driveKP = 0.04; //TODO: This must be tuned to specific robot
         public static final double driveKI = 0.0;
         public static final double driveKD = 0.0;
         public static final double driveKF = 0.0;

@@ -14,7 +14,10 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Commands.ClimberCommand;
+import frc.robot.Commands.TeleopSwerve;
 import frc.robot.Constants.Controls;
+import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.oldcommands.*;
 //import frc.robot.oldsubsystems.ArmSubsystem;
@@ -25,6 +28,8 @@ import frc.robot.oldsubsystems.TimerSubsystem;
 //import frc.robot.oldsubsystems.ArmSubsystem.Position;
 
 import static frc.robot.Constants.*;
+
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -41,6 +46,7 @@ public class RobotContainer {
 //  private final IntakeSubsystem s_Intake = new IntakeSubsystem(s_LED);
 //  private final ArmSubsystem s_Arm = new ArmSubsystem(s_LED, s_Intake);
   private final Swerve s_Swerve = new Swerve();
+  private final Climber s_Climber = new Climber();
   private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
   private final Auto auto = new Auto(s_Swerve, s_RobotPosition);
   private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
@@ -80,7 +86,8 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return auto.getAutoCommand();
+//    return new PathPlannerAuto("New Auto");//auto.getAutoCommand();
+   return Commands.sequence(Commands.runOnce(s_Swerve::zeroHeading, s_Swerve), new PathPlannerAuto("New Auto"));//auto.getAutoCommand();
   }
 
   /*
@@ -101,6 +108,10 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     /* DRIVER BINDS */
 
+    ClimberCommand climberCommand = new ClimberCommand(s_Climber);
+    s_Climber.setDefaultCommand(climberCommand);
+    new JoystickButton(Controls.driver, XboxController.Button.kA.value)
+    .onTrue(Commands.runOnce(() -> climberCommand.toggleMode()));
     // Driver arm controls
  /*  new JoystickButton(Controls.driver, XboxController.Button.kA.value)
       .onTrue(Commands.runOnce(() -> driverTargetPosition = Position.GRID_LOW));
