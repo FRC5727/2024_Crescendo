@@ -221,5 +221,10 @@ public static final class Mod3 {
   public static int rightClimberMotorPort = 9;
   public static int leftShooterMotorPort = 10;
   public static int rightShooterMotorPort = 11;
+
+  public static int intakeAimMotorPort = 12;
+  public static int intakePullMotorPort = 13;
+  public static int intakeEncoderPort = 4;
+
   public static double shooterSpeed = 1.0;
 }
