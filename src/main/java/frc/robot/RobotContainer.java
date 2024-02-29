@@ -18,6 +18,7 @@ import frc.robot.Commands.ClimberCommand;
 import frc.robot.Commands.TeleopSwerve;
 import frc.robot.Constants.Controls;
 import frc.robot.Subsystems.Climber;
+import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.oldcommands.*;
 //import frc.robot.oldsubsystems.ArmSubsystem;
@@ -46,7 +47,9 @@ public class RobotContainer {
 //  private final IntakeSubsystem s_Intake = new IntakeSubsystem(s_LED);
 //  private final ArmSubsystem s_Arm = new ArmSubsystem(s_LED, s_Intake);
   private final Swerve s_Swerve = new Swerve();
-  private final Climber s_Climber = new Climber();
+//  private final Climber s_Climber = new Climber();
+  private final Shooter s_Shooter = new Shooter();
+//  private final ClimberCommand climberCommand;
   private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
   private final Auto auto = new Auto(s_Swerve, s_RobotPosition);
   private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
@@ -71,6 +74,8 @@ public class RobotContainer {
             s_Swerve::getSpeedLimitXY,
             s_Swerve::getSpeedLimitRot
         ));
+  //  climberCommand = new ClimberCommand(s_Climber);
+  //  s_Climber.setDefaultCommand(climberCommand);
 //    s_Intake.setDefaultCommand(Commands.startEnd(s_Intake::idle, () -> {}, s_Intake));
     configureBindings();
 
@@ -108,10 +113,8 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     /* DRIVER BINDS */
 
-    ClimberCommand climberCommand = new ClimberCommand(s_Climber);
-    s_Climber.setDefaultCommand(climberCommand);
-    new JoystickButton(Controls.driver, XboxController.Button.kA.value)
-    .onTrue(Commands.runOnce(() -> climberCommand.toggleMode()));
+//    new JoystickButton(Controls.driver, XboxController.Button.kA.value)
+//    .onTrue(Commands.runOnce(() -> climberCommand.toggleMode()));
     // Driver arm controls
  /*  new JoystickButton(Controls.driver, XboxController.Button.kA.value)
       .onTrue(Commands.runOnce(() -> driverTargetPosition = Position.GRID_LOW));
@@ -125,6 +128,7 @@ public class RobotContainer {
     Trigger driverLeftTrigger = new Trigger(() -> Controls.driver.getLeftTriggerAxis() > Controls.triggerAxisThreshold);
     Trigger driverRightTrigger = new Trigger(() -> Controls.driver.getRightTriggerAxis() > Controls.triggerAxisThreshold);
   
+    driverRightTrigger.whileTrue(Commands.run(() -> s_Shooter.setSpeed(Constants.shooterSpeed))).onFalse(Commands.run(() -> s_Shooter.stop()));
     // Move to selected position
 /*    Trigger armTrigger = 
       driverRightBumper.whileTrue(
