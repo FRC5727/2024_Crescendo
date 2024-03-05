@@ -227,4 +227,16 @@ public static final class Mod3 {
   public static int intakeEncoderPort = 4;
 
   public static double shooterSpeed = 1.0;
+  public static double spinupDurationMS = 2000.0; // Milliseconds
+  public static double fireDurationMS = 500.0; // Milliseconds
+  public static double intakeAimSpeed = 0.01;
+  public static double intakeAimThreshold = 1; // In degrees
+
+  public static class intakeAngles
+  {
+    public static double intake = -0.473;
+    public static double feed = 0.0005;
+    public static double fireAmp = 0.0;
+    public static double fireSpeaker = 0.0;
+  }
 }

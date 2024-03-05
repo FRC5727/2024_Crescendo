@@ -4,7 +4,13 @@
 
 package frc.robot.Subsystems;
 
+import java.util.ResourceBundle.Control;
+
+import com.ctre.phoenix6.hardware.CANcoder;
+import com.ctre.phoenix6.hardware.TalonFX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
   public static enum IntakePosition
@@ -15,24 +21,64 @@ public class Intake extends SubsystemBase {
     fireSpeaker,
   }
 
-  /** Creates a new Intake. */
-  public Intake() {}
+  private TalonFX aimMotor, shootMotor;
+  private CANcoder encoder;
+  private IntakePosition targetPosition;
 
-  public void moveTo(IntakePosition position)
+  /** Creates a new Intake. */
+  public Intake()
   {
-    switch (position)
+    aimMotor = new TalonFX(Constants.intakeAimMotorPort);
+    shootMotor = new TalonFX(Constants.intakePullMotorPort);
+    encoder = new CANcoder(Constants.intakeEncoderPort);
+  }
+
+  public void shoot(double speed)
+  {
+    shootMotor.set(speed);
+  }
+  private static double getAngleFor(IntakePosition position)
+  {
+switch (position)
     {
       case intake: // Move to intake position
-      break;
+        return Constants.intakeAngles.intake;
       case feed: // Move to shooter-feeding position
-      break;
+        return Constants.intakeAngles.feed;
       case fireAmp: // Move to firing position for amp
-      break;
+        return Constants.intakeAngles.fireAmp;
       case fireSpeaker: // Move to firing position for speaker
+        return Constants.intakeAngles.fireSpeaker;
+      default:
+        return 0;
     }
   }
+  public void moveTo(IntakePosition position, double speed)
+  {
+    targetPosition = position;
+    if (encoder.getAbsolutePosition().getValue() < getAngleFor(position))
+      aimMotor.set(speed);
+    else if (encoder.getAbsolutePosition().getValue() > getAngleFor(position))
+      aimMotor.set(-speed);
+    else
+      aimMotor.set(0);
+  }
+  public IntakePosition getPosition() // Which position the intake is currently in
+  {
+    for (IntakePosition position: IntakePosition.values())
+    if (Math.abs(encoder.getAbsolutePosition().getValue() - getAngleFor(position)) < Constants.intakeAimThreshold)
+      return position;
+    return null;
+  }
+  public double getAimSpeed()
+  {
+    return aimMotor.get();
+  }
   @Override
-  public void periodic() {
+  public void periodic()
+  {
+    if (getPosition() == targetPosition)
+      aimMotor.stopMotor();
     // This method will be called once per scheduler run
   }
 }
