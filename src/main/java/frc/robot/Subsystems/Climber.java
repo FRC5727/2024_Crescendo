@@ -4,8 +4,11 @@
 
 package frc.robot.Subsystems;
 
+import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
+import com.ctre.phoenix6.controls.ControlRequest;
 import com.ctre.phoenix6.controls.DutyCycleOut;
+import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -25,6 +28,7 @@ public class Climber extends SubsystemBase {
   public Climber() {
     leftClimberMotor = new TalonFX(Constants.leftClimberMotorPort);
     rightClimberMotor = new TalonFX(Constants.rightClimberMotorPort);
+    CANcoder coder;
 
     gyro = new Pigeon2(Constants.Swerve.pigeonID, Constants.CANivoreName);
     gyro.getConfigurator().apply(new Pigeon2Configuration());

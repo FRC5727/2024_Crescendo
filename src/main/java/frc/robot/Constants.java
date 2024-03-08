@@ -36,8 +36,9 @@ public final class Constants {
         public static final double climberKI = 0;
         public static final double climberKD = 0;
 
-    public static final double minimumClimberHeight = 1;
-    public static final double maxClimberHeight = 4;
+    public static final double minimumClimberHeight = 0; // Minimum during retraction mode
+    public static final double maxClimberHeight = 25.4; // CM
+    public static final double rotationsPerCM = 100 / maxClimberHeight;
     public static final class Swerve {
         public static final int pigeonID = 0;
 
