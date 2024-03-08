@@ -46,7 +46,7 @@ public class ShootCommand extends Command
     {
       case 0: // Moving intake
         if (intake.getPosition() != IntakePosition.feed)
-          intake.moveTo(IntakePosition.feed, Constants.intakeAimSpeed);
+          intake.moveTo(IntakePosition.feed);
    //     shooter.setSpeed(Constants.shooterSpeed);
         step = 1;
         break;
@@ -54,7 +54,7 @@ public class ShootCommand extends Command
         if (//shooter.getSpeed() == Constants.shooterSpeed &&
           intake.getPosition() == IntakePosition.feed)
         {
-          intake.shoot(Constants.shooterSpeed);
+          intake.setIntakeMotor(Constants.intakeShootSpeed);
           step = 2;
           startTime = System.currentTimeMillis();
         }
@@ -63,7 +63,7 @@ public class ShootCommand extends Command
       {
         if (System.currentTimeMillis() >= startTime + Constants.fireDurationMS) // Done firing
         {
-          intake.shoot(0);
+          intake.setIntakeMotor(0);
           shooter.setSpeed(0);
           step = 3;
         }
@@ -78,7 +78,7 @@ public class ShootCommand extends Command
   @Override
   public void end(boolean interrupted)
   {
-    intake.shoot(0);
+    intake.setIntakeMotor(0);
     shooter.setSpeed(0);
   }
 

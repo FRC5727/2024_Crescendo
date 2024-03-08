@@ -225,18 +225,27 @@ public static final class Mod3 {
   public static int intakeAimMotorPort = 12;
   public static int intakePullMotorPort = 13;
   public static int intakeEncoderPort = 4;
+  public static int intakeSensorPort = 0;
 
   public static double shooterSpeed = 1.0;
+  public static double intakeShootSpeed = 1.0;
+  public static double intakeIntakeSpeed = 0.4;
   public static double spinupDurationMS = 2000.0; // Milliseconds
   public static double fireDurationMS = 500.0; // Milliseconds
-  public static double intakeAimSpeed = 0.01;
-  public static double intakeAimThreshold = 1; // In degrees
+
+  public static double intakeAimThreshold = 0.01; // In rotations
 
   public static class intakeAngles
   {
-    public static double intake = -0.473;
-    public static double feed = 0.0005;
+    public static double intake = -0.10;
+    public static double feed = 0.429932;
     public static double fireAmp = 0.0;
     public static double fireSpeaker = 0.0;
   }
+
+  public PIDConstants intakeConstants = new PIDConstants( // PID
+    1.0, // P
+    0.0, // I
+    0.0  // D
+  );
 }
