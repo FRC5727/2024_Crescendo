@@ -27,6 +27,8 @@ public class ClimberCommand extends Command {
 
   // Get the current height of the left arm
   public double leftArmHeight()
+  //josie goofing below
+  
   {
     return 0;
   }

@@ -7,6 +7,7 @@ package frc.robot.Subsystems;
 import java.util.ResourceBundle.Control;
 
 import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -29,6 +30,8 @@ public class Intake extends SubsystemBase {
     none
   }
 
+  private static final TalonFXConfiguration intakePID = null;
+
   private TalonFX aimMotor, shootMotor;
   private CANcoder encoder;
   private IntakePosition targetPosition;
@@ -45,6 +48,11 @@ public class Intake extends SubsystemBase {
     sensor = new DigitalInput(Constants.intakeSensorPort);
 
     aimMotor.getConfigurator().apply(intakePID);
+    aimMotor.getConfigurator().setPosition(0.0);
+    resetPosition();
+
+    aimMotor.getConfigurator().apply(Robot.ctreConfigs.intakeAimFXConfig);
+    encoder.getConfigurator().apply(Robot.ctreConfigs.intakeAimCANcoderConfig);// Don't know how to put in CTRE config yet)
     aimMotor.getConfigurator().setPosition(0.0);
     resetPosition();
   }

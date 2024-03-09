@@ -89,6 +89,11 @@ public final class Constants {
         public static final double openLoopRamp = 0.25;
         public static final double closedLoopRamp = 0.0;
 
+        /*Aim Motor Josie PID */
+        public static final double aimKP = 0.01; // Josie Added instead of non-static PID
+        public static final double aimKI = 0.00;
+        public static final double aimKD = 0.00;  
+
         /* Angle Motor PID Values */
         public static final double angleKP = chosenModule.angleKP;
         public static final double angleKI = chosenModule.angleKI;
@@ -108,10 +113,12 @@ public final class Constants {
         /* Swerve Profiling Values */
         /** Meters per Second */
         public static final double maxSpeed = 4.5; //TODO: This must be tuned to specific robot
-        
+    
+      
     public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
       new PIDConstants(driveKP, driveKI, driveKD, driveKF), // Translation constants 
       new PIDConstants(angleKP, angleKI, angleKD), // Rotation constants 
+      //new PIDConstants(aimKP, aimKI, aimKD), //Aim Constants
       maxSpeed, 
       new Translation2d(wheelBase / 2.0, trackWidth / 2.0).getNorm(),
       //flModuleOffset.getNorm(), // Drive base radius (distance from center to furthest module) 
@@ -242,11 +249,13 @@ public static final class Mod3 {
     public static double feed = 0.429932;
     public static double fireAmp = 0.0;
     public static double fireSpeaker = 0.0;
+
+    public static final int canCoderID = 4;
   }
 
-  public PIDConstants intakeConstants = new PIDConstants( // PID
+  /*public PIDConstants intakeConstants = new PIDConstants( // PID
     1.0, // P
     0.0, // I
     0.0  // D
-  );
+  );*/
 }

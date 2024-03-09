@@ -128,7 +128,7 @@ public class RobotContainer {
     Trigger driverLeftTrigger = new Trigger(() -> Controls.driver.getLeftTriggerAxis() > Controls.triggerAxisThreshold);
     Trigger driverRightTrigger = new Trigger(() -> Controls.driver.getRightTriggerAxis() > Controls.triggerAxisThreshold);
   
-    driverRightTrigger.onTrue(new ShootCommand(s_Intake, s_Shooter));
+    driverRightTrigger.whileTrue(Commands.run(() -> s_Shooter.setSpeed(Constants.shooterSpeed))).onFalse(Commands.run(() -> s_Shooter.stop()));
     // Move to selected position
 /*    Trigger armTrigger = 
       driverRightBumper.whileTrue(

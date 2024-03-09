@@ -7,12 +7,17 @@ public final class CTREConfigs {
     public TalonFXConfiguration swerveAngleFXConfig = new TalonFXConfiguration();
     public TalonFXConfiguration swerveDriveFXConfig = new TalonFXConfiguration();
     public CANcoderConfiguration swerveCANcoderConfig = new CANcoderConfiguration();
+    public TalonFXConfiguration intakeAngleFXConfig = new TalonFXConfiguration(); //Possibly Angle config 
+    public TalonFXConfiguration intakeAimFXConfig = new TalonFXConfiguration(); //jOSIE
+    public CANcoderConfiguration intakeAimCANcoderConfig = new CANcoderConfiguration(); //MIAH
 
     public CTREConfigs(){
         /** Swerve CANCoder Configuration */
         swerveCANcoderConfig.MagnetSensor.SensorDirection = Constants.Swerve.cancoderInvert;
 
-        /** Swerve Angle Motor Configurations */
+        /*attempting to put in Intake Cancoder */
+        intakeAimCANcoderConfig.MagnetSensor.SensorDirection = Constants.Swerve.cancoderInvert;
+
         /* Motor Inverts and Neutral Mode */
         swerveAngleFXConfig.MotorOutput.Inverted = Constants.Swerve.angleMotorInvert;
         swerveAngleFXConfig.MotorOutput.NeutralMode = Constants.Swerve.angleNeutralMode;
@@ -50,6 +55,12 @@ public final class CTREConfigs {
         swerveDriveFXConfig.Slot0.kP = Constants.Swerve.driveKP;
         swerveDriveFXConfig.Slot0.kI = Constants.Swerve.driveKI;
         swerveDriveFXConfig.Slot0.kD = Constants.Swerve.driveKD;
+
+        /* Aim PID Config */
+
+       intakeAimFXConfig.Slot0.kP = Constants.Swerve.aimKP;
+       intakeAimFXConfig.Slot0.kI = Constants.Swerve.aimKI;
+       intakeAimFXConfig.Slot0.kD = Constants.Swerve.aimKD;
 
         /* Open and Closed Loop Ramping */
         swerveDriveFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = Constants.Swerve.openLoopRamp;
