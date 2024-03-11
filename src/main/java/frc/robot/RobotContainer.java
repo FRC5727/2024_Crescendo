@@ -15,11 +15,15 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Commands.ClimberCommand;
+import frc.robot.Commands.GroundIntakeCommand;
+import frc.robot.Commands.ShootCommand;
 import frc.robot.Commands.TeleopSwerve;
 import frc.robot.Constants.Controls;
 import frc.robot.Subsystems.Climber;
+import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
+import frc.robot.Subsystems.Intake.IntakePosition;
 import frc.robot.oldcommands.*;
 //import frc.robot.oldsubsystems.ArmSubsystem;
 //import frc.robot.oldsubsystems.IntakeSubsystem;
@@ -48,10 +52,11 @@ public class RobotContainer {
 //  private final ArmSubsystem s_Arm = new ArmSubsystem(s_LED, s_Intake);
   private final Swerve s_Swerve = new Swerve();
 //  private final Climber s_Climber = new Climber();
+  private final Intake s_Intake = new Intake();
   private final Shooter s_Shooter = new Shooter();
 //  private final ClimberCommand climberCommand;
-  private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
-  private final Auto auto = new Auto(s_Swerve, s_RobotPosition);
+//  private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
+//  private final Auto auto = new Auto(s_Swerve, s_RobotPosition);
   private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
 
 //  private Position driverTargetPosition = Position.CHASSIS;
@@ -128,7 +133,11 @@ public class RobotContainer {
     Trigger driverLeftTrigger = new Trigger(() -> Controls.driver.getLeftTriggerAxis() > Controls.triggerAxisThreshold);
     Trigger driverRightTrigger = new Trigger(() -> Controls.driver.getRightTriggerAxis() > Controls.triggerAxisThreshold);
   
-    driverRightTrigger.whileTrue(Commands.run(() -> s_Shooter.setSpeed(Constants.shooterSpeed))).onFalse(Commands.run(() -> s_Shooter.stop()));
+    driverLeftTrigger.whileTrue(new GroundIntakeCommand(s_Intake));
+    driverRightTrigger.whileTrue(new ShootCommand(s_Intake, s_Shooter));
+    
+//    new POVButton(Controls.driver, 0).onTrue(Commands.run(() -> s_Intake.moveTo(IntakePosition.feed)));
+//    new POVButton(Controls.driver, 180).onTrue(Commands.run(() -> s_Intake.moveTo(IntakePosition.intake)));
     // Move to selected position
 /*    Trigger armTrigger = 
       driverRightBumper.whileTrue(

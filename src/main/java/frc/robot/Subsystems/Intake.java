@@ -25,18 +25,17 @@ public class Intake extends SubsystemBase {
   {
     intake,
     feed,
-    fireAmp,
-    fireSpeaker,
+//    fireAmp,
+//    fireSpeaker,
     none
   }
-
-  private static final TalonFXConfiguration intakePID = null;
 
   private TalonFX aimMotor, shootMotor;
   private CANcoder encoder;
   private IntakePosition targetPosition;
   private DigitalInput sensor; // Detects presence of ring
-
+  private DigitalInput intakeLimit; // Detects hitting floor
+  private DigitalInput feedLimit; // Detects hitting back of robot
   private PositionVoltage anglePosition = new PositionVoltage(0);
 
   /** Creates a new Intake. */
@@ -46,14 +45,11 @@ public class Intake extends SubsystemBase {
     shootMotor = new TalonFX(Constants.intakePullMotorPort);
     encoder = new CANcoder(Constants.intakeEncoderPort);
     sensor = new DigitalInput(Constants.intakeSensorPort);
-
-    aimMotor.getConfigurator().apply(intakePID);
-    aimMotor.getConfigurator().setPosition(0.0);
-    resetPosition();
-
-    aimMotor.getConfigurator().apply(Robot.ctreConfigs.intakeAimFXConfig);
-    encoder.getConfigurator().apply(Robot.ctreConfigs.intakeAimCANcoderConfig);// Don't know how to put in CTRE config yet)
-    aimMotor.getConfigurator().setPosition(0.0);
+    intakeLimit = new DigitalInput(Constants.intakeLimitPort);
+    feedLimit = new DigitalInput(Constants.feedLimitPort);
+    //aimMotor.getConfigurator().apply(Robot.ctreConfigs.intakeAimFXConfig);
+    //encoder.getConfigurator().apply(Robot.ctreConfigs.intakeAimCANcoderConfig);// Don't know how to put in CTRE config yet)
+    //aimMotor.getConfigurator().setPosition(0.0);
     resetPosition();
   }
 
@@ -74,10 +70,10 @@ switch (position)
         return Constants.intakeAngles.intake;
       case feed: // Move to shooter-feeding position
         return Constants.intakeAngles.feed;
-      case fireAmp: // Move to firing position for amp
+  /*    case fireAmp: // Move to firing position for amp
         return Constants.intakeAngles.fireAmp;
       case fireSpeaker: // Move to firing position for speaker
-        return Constants.intakeAngles.fireSpeaker;
+        return Constants.intakeAngles.fireSpeaker;*/
       default:
         return 0;
     }
@@ -86,13 +82,21 @@ switch (position)
   {
     if (getPosition() == position) return; // Don't do if we're already there
     targetPosition = position;
-    aimMotor.setControl(anglePosition.withPosition(new Rotation2d(getAngleFor(position)).getRotations()));
+    if (targetPosition == IntakePosition.feed)// encoder.getAbsolutePosition().getValue() < getAngleFor(position))
+      aimMotor.set(Constants.IntakeAim.speed);
+    else if (targetPosition == IntakePosition.intake)// encoder.getAbsolutePosition().getValue() > getAngleFor(position))
+      aimMotor.set(-Constants.IntakeAim.speed);
+    else aimMotor.set(0);
+    // aimMotor.setControl(anglePosition.withPosition(getAngleFor(position)));
   }
   public IntakePosition getPosition() // Which position the intake is currently in
   {
+    if (intakeLimit.get()) return IntakePosition.intake;
+    if (feedLimit.get()) return IntakePosition.feed;
+    /*
     for (IntakePosition position: IntakePosition.values())
-    if (Math.abs(encoder.getAbsolutePosition().getValue() - getAngleFor(position)) < Constants.intakeAimThreshold)
-      return position;
+    if (Math.abs(encoder.getAbsolutePosition().getValue() - getAngleFor(position)) < Constants.IntakeAim.threshold)
+      return position;*/
     return IntakePosition.none;
   }
   public double getAimSpeed()
@@ -109,7 +113,11 @@ switch (position)
     SmartDashboard.putNumber("Intake angle: ", encoder.getAbsolutePosition().getValue());
     SmartDashboard.putString("Nearest intake position: ", getPosition().name());
     SmartDashboard.putBoolean("Note loaded: ", containsNote());
-    if (getPosition() == targetPosition)
+    SmartDashboard.putBoolean("Rear limit switch: ", feedLimit.get());
+    SmartDashboard.putBoolean("Forward limit switch: ", intakeLimit.get());
+    if (intakeLimit.get() && targetPosition == IntakePosition.intake)
+      aimMotor.stopMotor();
+    if (feedLimit.get() && targetPosition == IntakePosition.feed)
       aimMotor.stopMotor();
     // This method will be called once per scheduler run
   }

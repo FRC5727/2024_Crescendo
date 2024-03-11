@@ -15,9 +15,6 @@ public final class CTREConfigs {
         /** Swerve CANCoder Configuration */
         swerveCANcoderConfig.MagnetSensor.SensorDirection = Constants.Swerve.cancoderInvert;
 
-        /*attempting to put in Intake Cancoder */
-        intakeAimCANcoderConfig.MagnetSensor.SensorDirection = Constants.Swerve.cancoderInvert;
-
         /* Motor Inverts and Neutral Mode */
         swerveAngleFXConfig.MotorOutput.Inverted = Constants.Swerve.angleMotorInvert;
         swerveAngleFXConfig.MotorOutput.NeutralMode = Constants.Swerve.angleNeutralMode;
@@ -25,7 +22,7 @@ public final class CTREConfigs {
         /* Gear Ratio and Wrapping Config */
         swerveAngleFXConfig.Feedback.SensorToMechanismRatio = Constants.Swerve.angleGearRatio;
         swerveAngleFXConfig.ClosedLoopGeneral.ContinuousWrap = true;
-        
+
         /* Current Limiting */
         swerveAngleFXConfig.CurrentLimits.SupplyCurrentLimitEnable = Constants.Swerve.angleEnableCurrentLimit;
         swerveAngleFXConfig.CurrentLimits.SupplyCurrentLimit = Constants.Swerve.angleCurrentLimit;
@@ -57,16 +54,32 @@ public final class CTREConfigs {
         swerveDriveFXConfig.Slot0.kD = Constants.Swerve.driveKD;
 
         /* Aim PID Config */
+        intakeAimCANcoderConfig.MagnetSensor.SensorDirection = Constants.IntakeAim.encoderInvert;
 
-       intakeAimFXConfig.Slot0.kP = Constants.Swerve.aimKP;
-       intakeAimFXConfig.Slot0.kI = Constants.Swerve.aimKI;
-       intakeAimFXConfig.Slot0.kD = Constants.Swerve.aimKD;
+        /* Motor Inverts and Neutral Mode */
+        swerveAngleFXConfig.MotorOutput.Inverted = Constants.IntakeAim.motorInvert;
+        swerveAngleFXConfig.MotorOutput.NeutralMode = Constants.IntakeAim.neutralMode;
+
+        /* Gear Ratio and Wrapping Config */
+        intakeAimFXConfig.Feedback.SensorToMechanismRatio = Constants.IntakeAim.gearRatio;
+        intakeAimFXConfig.ClosedLoopGeneral.ContinuousWrap = true;
+
+        /* Current Limiting */
+        intakeAimFXConfig.CurrentLimits.SupplyCurrentLimitEnable = Constants.Swerve.angleEnableCurrentLimit;
+        intakeAimFXConfig.CurrentLimits.SupplyCurrentLimit = Constants.IntakeAim.currentLimit;
+        intakeAimFXConfig.CurrentLimits.SupplyCurrentThreshold = Constants.Swerve.angleCurrentThreshold;
+        intakeAimFXConfig.CurrentLimits.SupplyTimeThreshold = Constants.Swerve.angleCurrentThresholdTime;
+
+        /* PID Config */
+       intakeAimFXConfig.Slot0.kP = Constants.IntakeAim.aimKP;
+       intakeAimFXConfig.Slot0.kI = Constants.IntakeAim.aimKI;
+       intakeAimFXConfig.Slot0.kD = Constants.IntakeAim.aimKD;
 
         /* Open and Closed Loop Ramping */
-        swerveDriveFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = Constants.Swerve.openLoopRamp;
-        swerveDriveFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = Constants.Swerve.openLoopRamp;
+        intakeAimFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = Constants.Swerve.openLoopRamp;
+        intakeAimFXConfig.OpenLoopRamps.VoltageOpenLoopRampPeriod = Constants.Swerve.openLoopRamp;
 
-        swerveDriveFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = Constants.Swerve.closedLoopRamp;
-        swerveDriveFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = Constants.Swerve.closedLoopRamp;
+        intakeAimFXConfig.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = Constants.Swerve.closedLoopRamp;
+        intakeAimFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = Constants.Swerve.closedLoopRamp;
     }
 }

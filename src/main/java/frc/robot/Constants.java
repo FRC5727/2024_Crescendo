@@ -89,11 +89,6 @@ public final class Constants {
         public static final double openLoopRamp = 0.25;
         public static final double closedLoopRamp = 0.0;
 
-        /*Aim Motor Josie PID */
-        public static final double aimKP = 0.01; // Josie Added instead of non-static PID
-        public static final double aimKI = 0.00;
-        public static final double aimKD = 0.00;  
-
         /* Angle Motor PID Values */
         public static final double angleKP = chosenModule.angleKP;
         public static final double angleKI = chosenModule.angleKI;
@@ -234,6 +229,8 @@ public static final class Mod3 {
   public static int intakePullMotorPort = 13;
   public static int intakeEncoderPort = 4;
   public static int intakeSensorPort = 0;
+  public static int intakeLimitPort = 9;
+  public static int feedLimitPort = 4;
 
   public static double shooterSpeed = 1.0;
   public static double intakeShootSpeed = 1.0;
@@ -241,18 +238,35 @@ public static final class Mod3 {
   public static double spinupDurationMS = 2000.0; // Milliseconds
   public static double fireDurationMS = 500.0; // Milliseconds
 
-  public static double intakeAimThreshold = 0.01; // In rotations
+  public static class IntakeAim
+  {
+    public static SensorDirectionValue encoderInvert = SensorDirectionValue.CounterClockwise_Positive;
+    public static InvertedValue motorInvert = InvertedValue.Clockwise_Positive;
+    public static NeutralModeValue neutralMode = NeutralModeValue.Brake;
+    public static double threshold = 0.01; // In rotations
+    public static double gearRatio = 220.;
+
+    public static double currentLimit = 35;
+    /*Aim Motor Josie PID */
+    public static final double aimKP = 0.04; // Josie Added instead of non-static PID
+    public static final double aimKI = 0.00;
+    public static final double aimKD = 0.00;  
+
+    // Not using above PID For now
+
+    public static final double speed = 0.25;
+  }
 
   public static class intakeAngles
   {
-    public static double intake = -0.10;
-    public static double feed = 0.429932;
-    public static double fireAmp = 0.0;
-    public static double fireSpeaker = 0.0;
-
-    public static final int canCoderID = 4;
+    public static double intake = -0.02;
+    public static double feed = 0.489932;
+ //   public static double fireAmp = 0.0;
+ //   public static double fireSpeaker = 0.0;
   }
 
+  
+  public static final int canCoderID = 4;
   /*public PIDConstants intakeConstants = new PIDConstants( // PID
     1.0, // P
     0.0, // I

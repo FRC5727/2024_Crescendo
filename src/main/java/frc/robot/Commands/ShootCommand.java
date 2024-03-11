@@ -47,14 +47,14 @@ public class ShootCommand extends Command
       case 0: // Moving intake
         if (intake.getPosition() != IntakePosition.feed)
           intake.moveTo(IntakePosition.feed);
-   //     shooter.setSpeed(Constants.shooterSpeed);
+          shooter.setSpeed(-Constants.shooterSpeed);
         step = 1;
         break;
       case 1: // Waiting to spin up
-        if (//shooter.getSpeed() == Constants.shooterSpeed &&
+        if (shooter.getSpeed() == -Constants.shooterSpeed &&
           intake.getPosition() == IntakePosition.feed)
         {
-          intake.setIntakeMotor(Constants.intakeShootSpeed);
+          intake.setIntakeMotor(-Constants.intakeShootSpeed);
           step = 2;
           startTime = System.currentTimeMillis();
         }
