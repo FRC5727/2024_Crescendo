@@ -55,8 +55,8 @@ public class RobotContainer {
   private final Intake s_Intake = new Intake();
   private final Shooter s_Shooter = new Shooter();
 //  private final ClimberCommand climberCommand;
-//  private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
-//  private final Auto auto = new Auto(s_Swerve, s_RobotPosition);
+  private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
+  private final Auto auto = new Auto(s_Swerve, s_RobotPosition);
   private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
 
 //  private Position driverTargetPosition = Position.CHASSIS;
@@ -97,7 +97,7 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
 //    return new PathPlannerAuto("New Auto");//auto.getAutoCommand();
-   return Commands.sequence(Commands.runOnce(s_Swerve::zeroHeading, s_Swerve), new PathPlannerAuto("New Auto"));//auto.getAutoCommand();
+   return auto.getAutoCommand();
   }
 
   /*
@@ -136,8 +136,8 @@ public class RobotContainer {
     driverLeftTrigger.whileTrue(new GroundIntakeCommand(s_Intake));
     driverRightTrigger.whileTrue(new ShootCommand(s_Intake, s_Shooter));
     
-//    new POVButton(Controls.driver, 0).onTrue(Commands.run(() -> s_Intake.moveTo(IntakePosition.feed)));
-//    new POVButton(Controls.driver, 180).onTrue(Commands.run(() -> s_Intake.moveTo(IntakePosition.intake)));
+    new POVButton(Controls.driver, 0).onTrue(Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed)));
+    new POVButton(Controls.driver, 180).onTrue(Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.intake)));
     // Move to selected position
 /*    Trigger armTrigger = 
       driverRightBumper.whileTrue(
