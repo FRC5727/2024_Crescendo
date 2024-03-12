@@ -11,6 +11,7 @@ import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -37,6 +38,9 @@ public class Climber extends SubsystemBase {
     maxRotations = 0;
     currentRotationsL = 0;
     currentRotationsR = 0;
+
+    leftClimberMotor.setNeutralMode(NeutralModeValue.Brake);
+    rightClimberMotor.setNeutralMode(NeutralModeValue.Brake);
   }
 
   public double getTilt() {

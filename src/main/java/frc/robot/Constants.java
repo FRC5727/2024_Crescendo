@@ -272,4 +272,6 @@ public static final class Mod3 {
     0.0, // I
     0.0  // D
   );*/
+
+  public static final double climberSpeed = 0.80;
 }
