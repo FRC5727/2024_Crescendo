@@ -22,12 +22,14 @@ public class ShootCommand extends Command
   // step 2 - fire
   // step 3 - done
   private double startTime;
-
+  private double targetSpeed;
+  
   /** Creates a new ShooterFeedCommand. */
-  public ShootCommand(Intake intake, Shooter shooter)
+  public ShootCommand(Intake intake, Shooter shooter, double targetSpeed)
   {
     this.intake = intake;
     this.shooter = shooter;
+    this.targetSpeed = targetSpeed;
     addRequirements(intake, shooter);
   }
 
@@ -47,12 +49,13 @@ public class ShootCommand extends Command
       case 0: // Moving intake
         if (intake.getPosition() != IntakePosition.feed)
           intake.moveTo(IntakePosition.feed);
-          shooter.setSpeed(-Constants.shooterSpeed);
+        shooter.setSpeed(-targetSpeed);
         step = 1;
         break;
       case 1: // Waiting to spin up
-        if (shooter.getSpeed() == -Constants.shooterSpeed &&
-          intake.getPosition() == IntakePosition.feed)
+        if (
+          (Math.abs(shooter.getSpeed() - (-targetSpeed)) < Constants.shooterSpeedThreshold) &&
+          (intake.getPosition() == IntakePosition.feed))
         {
           intake.setIntakeMotor(-Constants.intakeShootSpeed);
           step = 2;

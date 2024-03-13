@@ -84,7 +84,9 @@ public class RobotContainer {
   //  s_Climber.setDefaultCommand(climberCommand);
 //    s_Intake.setDefaultCommand(Commands.startEnd(s_Intake::idle, () -> {}, s_Intake));
     configureBindings();
-NamedCommands.registerCommand("Shoot", new ShootCommand(s_Intake, s_Shooter)); //Shoot
+
+NamedCommands.registerCommand("Shoot", new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed)); //Shoot
+NamedCommands.registerCommand("Shoot Amp", new ShootCommand(s_Intake, s_Shooter, Constants.shooterAmpSpeed)); //Shoot amp
 NamedCommands.registerCommand("Intake", new GroundIntakeCommand(s_Intake)); //Intake
 NamedCommands.registerCommand("Load", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed))); // Get in Shooter Position
 NamedCommands.registerCommand("Intake Pos", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.intake))); // Get in Intake Position
@@ -139,8 +141,9 @@ NamedCommands.registerCommand("Intake Pos", Commands.runOnce(() -> s_Intake.move
     Trigger driverRightTrigger = new Trigger(() -> Controls.driver.getRightTriggerAxis() > Controls.triggerAxisThreshold);
   
     driverLeftTrigger.whileTrue(new GroundIntakeCommand(s_Intake));
-    driverRightTrigger.whileTrue(new ShootCommand(s_Intake, s_Shooter));
-    
+    driverRightTrigger.whileTrue(new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed));
+    driverRightBumper.whileTrue(new ShootCommand(s_Intake, s_Shooter, Constants.shooterAmpSpeed));
+
     new JoystickButton(Controls.driver, XboxController.Button.kY.value)
       .whileTrue(Commands.runOnce(() -> s_Climber.move(Constants.climberSpeed)))
       .onFalse(Commands.runOnce(() -> s_Climber.stop()));

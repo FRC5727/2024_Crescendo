@@ -232,7 +232,9 @@ public static final class Mod3 {
   public static int intakeLimitPort = 9;
   public static int feedLimitPort = 4;
 
-  public static double shooterSpeed = 1.0;
+  public static double shooterSpeakerSpeed = 1.0;
+  public static double shooterAmpSpeed = 0.15;
+  public static double shooterSpeedThreshold = 0.02;
   public static double intakeShootSpeed = 1.0;
   public static double intakeIntakeSpeed = 0.4;
   public static double spinupDurationMS = 2000.0; // Milliseconds
@@ -254,7 +256,7 @@ public static final class Mod3 {
 
     // Not using above PID For now
 
-    public static final double speed = 0.25;
+    public static final double speed = 0.50;
   }
 
   public static class intakeAngles
