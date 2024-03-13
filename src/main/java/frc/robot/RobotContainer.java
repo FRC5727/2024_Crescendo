@@ -84,10 +84,10 @@ public class RobotContainer {
   //  s_Climber.setDefaultCommand(climberCommand);
 //    s_Intake.setDefaultCommand(Commands.startEnd(s_Intake::idle, () -> {}, s_Intake));
     configureBindings();
-NamedCommands.registerCommand("Shoot", new ShootCommand(s_Intake, s_Shooter));
-NamedCommands.registerCommand("Intake", new GroundIntakeCommand(s_Intake));
-NamedCommands.registerCommand("Load", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed)));
-NamedCommands.registerCommand("Intake Pos", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.intake)));
+NamedCommands.registerCommand("Shoot", new ShootCommand(s_Intake, s_Shooter)); //Shoot
+NamedCommands.registerCommand("Intake", new GroundIntakeCommand(s_Intake)); //Intake
+NamedCommands.registerCommand("Load", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed))); // Get in Shooter Position
+NamedCommands.registerCommand("Intake Pos", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.intake))); // Get in Intake Position
 
     // Arm position chooser
 //    positionChooser.setDefaultOption("--- Arm Direct Debug Positions ---", null);
