@@ -62,7 +62,8 @@ public class RobotContainer {
 //  private final ClimberCommand climberCommand;
 //  private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
 //  private final Auto auto = new Auto(s_Swerve, s_RobotPosition);
-  private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
+SendableChooser<Command> simpleAutoChooser;
+private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
 
 //  private Position driverTargetPosition = Position.CHASSIS;
 
@@ -102,8 +103,44 @@ NamedCommands.registerCommand("Intake Pos", Commands.runOnce(() -> s_Intake.move
 //    }
 //    SmartDashboard.putData("Position chooser", positionChooser);
 
-    SendableChooser<Supplier<Command>> chooser = new SendableChooser<Supplier<Command>>();
+simpleAutoChooser = new SendableChooser<Command>();
 
+// Move a little, shoot, then move more and intake, then move back, then shoot again, then stop
+Command twoRings =
+      moveDistance(.240, 0, 0.240)
+      .andThen(
+        stopSwerve())
+      .andThen(Commands.waitSeconds(0.5))
+      .andThen(
+        new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed))
+      .andThen(
+        new GroundIntakeCommand(s_Intake)
+        .alongWith(moveDistance(1.5, 0, 3)
+          .andThen(Commands.waitSeconds(0.01))
+          .andThen(stopSwerve())))
+      .andThen(
+        Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed))
+        .alongWith(moveDistance(-1.5, 0, 3)))
+      .andThen(
+        stopSwerve(),
+        new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed)
+      );
+
+    // Move a little, then shoot, then move more, then stop
+    Command oneRing =
+      moveDistance(.240, 0, 0.240)
+      .andThen(
+        stopSwerve())
+      .andThen(Commands.waitSeconds(0.5))
+      .andThen(
+        new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed))
+      .andThen(moveDistance(1.5, 0, 3)
+          .andThen(Commands.waitSeconds(0.01))
+          .andThen(stopSwerve()));
+
+    simpleAutoChooser.addOption("One note", oneRing);
+    simpleAutoChooser.addOption("Two notes", twoRings);
+    SmartDashboard.putData("Auto", simpleAutoChooser);
     // Easy way to test AutoBalance
     //SmartDashboard.putData("Auto-Balance", new AutoBalanceCommand(s_Swerve, s_LED));
   }
@@ -126,27 +163,8 @@ NamedCommands.registerCommand("Intake Pos", Commands.runOnce(() -> s_Intake.move
     // Shoot, then intake while driving forward for 2 seconds,
     // then move to feed while driving backward for 2 seconds,
     // then stop and shoot
-    Command x =
-      moveDistance(.240, 0, 0.240)
-      .andThen(
-        stopSwerve())
-      .andThen(Commands.waitSeconds(0.5))
-      .andThen(
-        new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed))
-      .andThen(
-        new GroundIntakeCommand(s_Intake)
-        .alongWith(moveDistance(1.5, 0, 3))
-          .andThen(Commands.waitSeconds(0.01))
-          .andThen(stopSwerve()))
-      .andThen(
-        Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed))
-        .alongWith(moveDistance(-1.5, 0, 3)))
-      .andThen(
-        stopSwerve(),
-        new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed)
-      );
     
-    return x;
+    return simpleAutoChooser.getSelected();
   }
 
   /*
