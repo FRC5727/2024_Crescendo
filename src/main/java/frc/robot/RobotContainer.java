@@ -94,7 +94,10 @@ NamedCommands.registerCommand("Shoot", new ShootCommand(s_Intake, s_Shooter, Con
 NamedCommands.registerCommand("Shoot Amp", new ShootCommand(s_Intake, s_Shooter, Constants.shooterAmpSpeed)); //Shoot amp
 NamedCommands.registerCommand("Intake", new GroundIntakeCommand(s_Intake)); //Intake
 NamedCommands.registerCommand("Load", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed))); // Get in Shooter Position
-NamedCommands.registerCommand("Intake Pos", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.intake))); // Get in Intake Position
+NamedCommands.registerCommand("Intake Pos", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.intake))); // Get in Intake Position*/
+
+   new JoystickButton(Controls.driver, XboxController.Button.kBack.value)
+    .onTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
 
     // Arm position chooser
 //    positionChooser.setDefaultOption("--- Arm Direct Debug Positions ---", null);
