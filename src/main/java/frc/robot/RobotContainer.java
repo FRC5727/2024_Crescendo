@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -34,6 +36,8 @@ import frc.robot.oldsubsystems.TimerSubsystem;
 
 import static frc.robot.Constants.*;
 
+import java.util.function.Supplier;
+
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
@@ -56,8 +60,8 @@ public class RobotContainer {
   private final Intake s_Intake = new Intake();
   private final Shooter s_Shooter = new Shooter();
 //  private final ClimberCommand climberCommand;
-  private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
-  private final Auto auto = new Auto(s_Swerve, s_RobotPosition);
+//  private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
+//  private final Auto auto = new Auto(s_Swerve, s_RobotPosition);
   private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
 
 //  private Position driverTargetPosition = Position.CHASSIS;
@@ -98,13 +102,51 @@ NamedCommands.registerCommand("Intake Pos", Commands.runOnce(() -> s_Intake.move
 //    }
 //    SmartDashboard.putData("Position chooser", positionChooser);
 
+    SendableChooser<Supplier<Command>> chooser = new SendableChooser<Supplier<Command>>();
+
     // Easy way to test AutoBalance
     //SmartDashboard.putData("Auto-Balance", new AutoBalanceCommand(s_Swerve, s_LED));
   }
 
+  private Command moveDistance(double x, double y, double t)
+  {
+    return Commands.waitSeconds(t).alongWith(
+      Commands.runOnce(
+        () -> s_Swerve.drive(new Translation2d(x / t, y / t), 0, true, true), s_Swerve));
+  }
+  private Command stopSwerve()
+  {
+    return Commands.runOnce(
+      () -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false), s_Swerve);
+  }
   public Command getAutonomousCommand() {
 //    return new PathPlannerAuto("New Auto");//auto.getAutoCommand();
-   return auto.getAutoCommand();
+//   return auto.getAutoCommand();
+
+    // Shoot, then intake while driving forward for 2 seconds,
+    // then move to feed while driving backward for 2 seconds,
+    // then stop and shoot
+    Command x =
+      moveDistance(.240, 0, 0.240)
+      .andThen(
+        stopSwerve())
+      .andThen(Commands.waitSeconds(0.5))
+      .andThen(
+        new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed))
+      .andThen(
+        new GroundIntakeCommand(s_Intake)
+        .alongWith(moveDistance(1.5, 0, 3))
+          .andThen(Commands.waitSeconds(0.01))
+          .andThen(stopSwerve()))
+      .andThen(
+        Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed))
+        .alongWith(moveDistance(-1.5, 0, 3)))
+      .andThen(
+        stopSwerve(),
+        new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed)
+      );
+    
+    return x;
   }
 
   /*
