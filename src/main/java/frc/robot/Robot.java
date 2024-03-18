@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import frc.robot.Constants.Swerve;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -156,7 +156,7 @@ public class Robot extends TimedRobot {
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
-      //m_robotContainer.hack();
+      // m_robotContainer.hack();
       // m_autonomousCommand = Commands.runOnce(() -> DriverStation.reportWarning("Before starting: " + DriverStation.getMatchTime(), false)).andThen(m_autonomousCommand);
       m_autonomousCommand.schedule();
     }
@@ -175,6 +175,7 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+      m_robotContainer.hack();
     }
     //driveSubsystem.unPark();
   }
@@ -221,6 +222,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().cancelAll();
   }
 
+
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
@@ -232,4 +234,5 @@ public class Robot extends TimedRobot {
   /** This function is called periodically whilst in simulation. */
   @Override
   public void simulationPeriodic() {}
+
 }

@@ -3,8 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.cameraserver.CameraServer;
+
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.Joystick;
@@ -208,7 +207,6 @@ Command twoRings =
     driverRightTrigger.whileTrue(new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed));
     driverRightBumper.whileTrue(new ShootCommand(s_Intake, s_Shooter, Constants.shooterAmpSpeed));
 
-    
     new JoystickButton(Controls.driver, XboxController.Button.kY.value)
       .whileTrue(Commands.runOnce(() -> s_Climber.move(Constants.climberSpeed)))
       .onFalse(Commands.runOnce(() -> s_Climber.stop()));
@@ -216,8 +214,6 @@ Command twoRings =
       .whileTrue(Commands.runOnce(() -> s_Climber.move(-Constants.climberSpeed)))
       .onFalse(Commands.runOnce(() -> s_Climber.stop()));
     new POVButton(Controls.driver, 0).onTrue(Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed)));
-    new POVButton(Controls.driver, 90).whileTrue(Commands.runOnce(() -> s_Intake.setIntakeMotor(Constants.intakeShootSpeed))).onFalse(Commands.runOnce(() -> s_Intake.setIntakeMotor(0)));
-    new POVButton(Controls.driver, 270).whileTrue(Commands.runOnce(() -> s_Intake.setIntakeMotor(Constants.intakeIntakeSpeed))).onFalse(Commands.runOnce(() -> s_Intake.setIntakeMotor(0)));;
     new POVButton(Controls.driver, 180).onTrue(Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.intake)));
     // Move to selected position
 /*    Trigger armTrigger = 
@@ -262,8 +258,11 @@ Command twoRings =
 */
     SmartDashboard.putData("Zero Gyro", new InstantCommand(() -> s_Swerve.zeroHeading()));
   }
-
-
+// TODO Replace this ugly hack
+  // For some reason, after auto, the teleop controls are inverted
+  public void hack() {
+    s_Swerve.hack();
+  }
   public void disabled() {
  //   s_Intake.disabled();
   }
