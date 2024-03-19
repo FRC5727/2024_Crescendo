@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -95,6 +96,7 @@ NamedCommands.registerCommand("Shoot Amp", new ShootCommand(s_Intake, s_Shooter,
 NamedCommands.registerCommand("Intake", new GroundIntakeCommand(s_Intake)); //Intake
 NamedCommands.registerCommand("Load", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed))); // Get in Shooter Position
 NamedCommands.registerCommand("Intake Pos", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.intake))); // Get in Intake Position*/
+NamedCommands.registerCommand("Wait", new WaitCommand(0.01)); //Wait, Josie
 
    new JoystickButton(Controls.driver, XboxController.Button.kBack.value)
     .onTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
