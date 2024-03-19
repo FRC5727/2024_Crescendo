@@ -26,75 +26,39 @@ import frc.robot.oldcommands.*;
 import frc.robot.oldsubsystems.*;
 
 public class Auto {
-    private final HashMap<String, Command> eventMap = new HashMap<>();
-
     private final SendableChooser<String> pathChooser = new SendableChooser<>();
-    private final SendableChooser<Boolean> pieceChooser = new SendableChooser<>();
-    private final SendableChooser<Command> quickChooser = new SendableChooser<>();
 
-    private final double firstArmTimeout = 2.5;
-    private AutoConfig activeConfig;
-
-    public static class AutoConfig {
-        private final String path;
-
-        public AutoConfig(String path) {
-            this.path = path;
-        }
-    }
-
-    private final SortedMap<String, AutoConfig> quickpicks = new TreeMap<>(Map.ofEntries(
-    //    Map.entry("[Clear-Y] 2 HH + balance [outer]", new AutoConfig("SS-PlaceCone,pick,place,balance")),
-      //  Map.entry("[Clear-Y] 2 HH + balance [outer]", new AutoConfig("SS-PlaceCone,pick,place,balance")),
-    ));
-
-    public Auto(Swerve s_Swerve, RobotPosition s_RobotPosition) {
-        // eventMap.put("Move arm to second", new ArmCommand(s_Arm, () -> activeConfig.place2));
-        // pieceChooser.addOption("--- Initial Piece ---", null);
-        // pieceChooser.setDefaultOption("Cube", Boolean.TRUE);
-        // SmartDashboard.putData("Starting game piece", pieceChooser);
-
+    public Auto()
+    {
         pathChooser.addOption("--- Auto Routine ---", null);
-        pathChooser.setDefaultOption("No auto (face intake away)", null);
         for (String pathName : getPathnames()) {
             pathChooser.addOption(pathName, pathName);
         }
         SmartDashboard.putData("Autonomous routine", pathChooser);
-
-        quickChooser.addOption("--- Auto Quick Pick ---", null);
-        quickChooser.setDefaultOption("Manual selection", null);
-        for (String name : quickpicks.keySet()) {
-          quickChooser.addOption(name, AutoBuilder.buildAuto(name));
-        }
-        SmartDashboard.putData("Quick Picks", quickChooser);
     }
 
-    public Command getAutoCommand() {
-        Command autoCommand = quickChooser.getSelected();
-
-        if (autoCommand == null) {
-            AutoConfig config = new AutoConfig(pathChooser.getSelected());
-            autoCommand = buildCommand(config);
-        }
-        return autoCommand;
+    public Command getAutoCommand(Swerve s_Swerve)
+    {
+        if (pathChooser.getSelected() != null)
+            return buildCommand(s_Swerve, pathChooser.getSelected());
+        else return null;
     }
 
-    public Command buildCommand(AutoConfig config) {
-        if (config == null || config.path == null)
+    public Command buildCommand(Swerve s_Swerve, String pathName) {
+        if (pathName == null)
             return null;
 
         // List<PathPlannerPath> pathGroup = PathPlannerAuto.getPathGroupFromAutoFile(config.path);
-        activeConfig = config;
         return Commands.runOnce(() -> {
-            DriverStation.reportWarning("Running auto command built from path: " + config.path, false);
-            activeConfig = config;
-        }).andThen(AutoBuilder.followPath(PathPlannerPath.fromPathFile(activeConfig.path)));
+            DriverStation.reportWarning("Running auto command built from path: " + pathName, false);
+        })
+        .andThen(new PathPlannerAuto(pathName));
     }
 
     private static List<String> getPathnames() {
-        return Stream.of(new File(Filesystem.getDeployDirectory(), "pathplanner/paths").listFiles())
+        return Stream.of(new File(Filesystem.getDeployDirectory(), "pathplanner/autos").listFiles())
                 .filter(file -> !file.isDirectory())
-                .filter(file -> file.getName().matches(".*\\.path"))
+                .filter(file -> file.getName().matches(".*\\.auto"))
                 .map(File::getName)
                 .map(name -> name.substring(0, name.lastIndexOf(".")))
                 .sorted()

@@ -111,9 +111,8 @@ public final class Constants {
     
       
     public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-      new PIDConstants(driveKP, driveKI, driveKD, driveKF), // Translation constants 
-      new PIDConstants(angleKP, angleKI, angleKD), // Rotation constants 
-      //new PIDConstants(aimKP, aimKI, aimKD), //Aim Constants
+      new PIDConstants(0.02, 0.0, 0.0), // PID constants to correct for translation error (used to create the X and Y PID controllers)
+      new PIDConstants(4.25, 0.0, 0.0),
       maxSpeed, 
       new Translation2d(wheelBase / 2.0, trackWidth / 2.0).getNorm(),
       //flModuleOffset.getNorm(), // Drive base radius (distance from center to furthest module) 
@@ -273,7 +272,7 @@ public static final class Mod3 {
   {
     public static double intake = -0.02;
     public static double feed = 0.489932;
- //   public static double fireAmp = 0.0;
+    public static double fireAmp = 0.0;
  //   public static double fireSpeaker = 0.0;
   }
 
