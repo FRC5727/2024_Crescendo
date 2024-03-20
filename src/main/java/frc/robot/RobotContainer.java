@@ -62,7 +62,7 @@ public class RobotContainer {
   private final Shooter s_Shooter = new Shooter();
 //  private final ClimberCommand climberCommand;
 //  private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
-//  private final Auto auto = new Auto(s_Swerve, s_RobotPosition);
+private final Auto auto = new Auto();//s_Swerve, s_RobotPosition);
 SendableChooser<Command> simpleAutoChooser;
 private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
 
@@ -145,7 +145,7 @@ Command twoRings =
 
     simpleAutoChooser.addOption("One note", oneRing);
     simpleAutoChooser.addOption("Two notes", twoRings);
-    SmartDashboard.putData("Auto", simpleAutoChooser);
+    // SmartDashboard.putData("Auto", simpleAutoChooser);
     // Easy way to test AutoBalance
     //SmartDashboard.putData("Auto-Balance", new AutoBalanceCommand(s_Swerve, s_LED));
   }
@@ -168,8 +168,8 @@ Command twoRings =
     // Shoot, then intake while driving forward for 2 seconds,
     // then move to feed while driving backward for 2 seconds,
     // then stop and shoot
-    
-    return simpleAutoChooser.getSelected();
+    return auto.getAutoCommand(s_Swerve);
+    // return simpleAutoChooser.getSelected();
   }
 
   /*

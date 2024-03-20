@@ -265,7 +265,7 @@ public static final class Mod3 {
 
     // Not using above PID For now
 
-    public static final double speed = 0.60;
+    public static final double speed = 0.30;
   }
 
   public static class intakeAngles

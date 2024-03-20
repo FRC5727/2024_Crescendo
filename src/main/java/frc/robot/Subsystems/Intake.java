@@ -11,6 +11,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -50,6 +51,7 @@ public class Intake extends SubsystemBase {
     //aimMotor.getConfigurator().apply(Robot.ctreConfigs.intakeAimFXConfig);
     //encoder.getConfigurator().apply(Robot.ctreConfigs.intakeAimCANcoderConfig);// Don't know how to put in CTRE config yet)
     //aimMotor.getConfigurator().setPosition(0.0);
+    aimMotor.setNeutralMode(NeutralModeValue.Brake);
     resetPosition();
   }
 
