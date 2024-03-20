@@ -57,7 +57,7 @@ public class RobotContainer {
 //  private final IntakeSubsystem s_Intake = new IntakeSubsystem(s_LED);
 //  private final ArmSubsystem s_Arm = new ArmSubsystem(s_LED, s_Intake);
   private final Swerve s_Swerve = new Swerve();
-  private final Climber s_Climber = new Climber();
+// private final Climber s_Climber = new Climber();
   private final Intake s_Intake = new Intake();
   private final Shooter s_Shooter = new Shooter();
 //  private final ClimberCommand climberCommand;
@@ -209,12 +209,14 @@ Command twoRings =
     driverRightTrigger.whileTrue(new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed));
     driverRightBumper.whileTrue(new ShootCommand(s_Intake, s_Shooter, Constants.shooterAmpSpeed));
 
+    /*
     new JoystickButton(Controls.driver, XboxController.Button.kY.value)
       .whileTrue(Commands.runOnce(() -> s_Climber.move(Constants.climberSpeed)))
       .onFalse(Commands.runOnce(() -> s_Climber.stop()));
     new JoystickButton(Controls.driver, XboxController.Button.kA.value)
       .whileTrue(Commands.runOnce(() -> s_Climber.move(-Constants.climberSpeed)))
       .onFalse(Commands.runOnce(() -> s_Climber.stop()));
+    */
     new POVButton(Controls.driver, 0).onTrue(Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed)));
     new POVButton(Controls.driver, 180).onTrue(Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.intake)));
     // Move to selected position
