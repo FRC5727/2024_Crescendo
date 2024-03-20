@@ -11,7 +11,6 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -26,7 +25,7 @@ public class Intake extends SubsystemBase {
   {
     intake,
     feed,
-    fireAmp,
+//    fireAmp,
 //    fireSpeaker,
     none
   }
@@ -51,7 +50,6 @@ public class Intake extends SubsystemBase {
     //aimMotor.getConfigurator().apply(Robot.ctreConfigs.intakeAimFXConfig);
     //encoder.getConfigurator().apply(Robot.ctreConfigs.intakeAimCANcoderConfig);// Don't know how to put in CTRE config yet)
     //aimMotor.getConfigurator().setPosition(0.0);
-    aimMotor.setNeutralMode(NeutralModeValue.Brake);
     resetPosition();
   }
 
@@ -64,7 +62,7 @@ public class Intake extends SubsystemBase {
   {
     shootMotor.set(speed);
   }
-  public static double getAngleFor(IntakePosition position)
+  private static double getAngleFor(IntakePosition position)
   {
 switch (position)
     {
@@ -72,19 +70,13 @@ switch (position)
         return Constants.intakeAngles.intake;
       case feed: // Move to shooter-feeding position
         return Constants.intakeAngles.feed;
-      case fireAmp: // Move to firing position for amp
+  /*    case fireAmp: // Move to firing position for amp
         return Constants.intakeAngles.fireAmp;
-  /*    case fireSpeaker: // Move to firing position for speaker
+      case fireSpeaker: // Move to firing position for speaker
         return Constants.intakeAngles.fireSpeaker;*/
       default:
         return 0;
     }
-  }
-  public void setAimSpeed(double speed)
-  {
-    aimMotor.set(speed);
-    if (speed == 0)
-      aimMotor.stopMotor();
   }
   public void moveTo(IntakePosition position)
   {
@@ -101,11 +93,10 @@ switch (position)
   {
     if (intakeLimit.get()) return IntakePosition.intake;
     if (feedLimit.get()) return IntakePosition.feed;
-    
+    /*
     for (IntakePosition position: IntakePosition.values())
     if (Math.abs(encoder.getAbsolutePosition().getValue() - getAngleFor(position)) < Constants.IntakeAim.threshold)
-      return position;
-
+      return position;*/
     return IntakePosition.none;
   }
   public double getAimSpeed()
@@ -124,9 +115,9 @@ switch (position)
     SmartDashboard.putBoolean("Note loaded: ", containsNote());
     SmartDashboard.putBoolean("Rear limit switch: ", feedLimit.get());
     SmartDashboard.putBoolean("Forward limit switch: ", intakeLimit.get());
-    if (intakeLimit.get() && aimMotor.get() < 0) // Negative and at minimum
+    if (intakeLimit.get() && targetPosition == IntakePosition.intake)
       aimMotor.stopMotor();
-    if (feedLimit.get() && aimMotor.get() > 0) // Positive and
+    if (feedLimit.get() && targetPosition == IntakePosition.feed)
       aimMotor.stopMotor();
     // This method will be called once per scheduler run
   }
