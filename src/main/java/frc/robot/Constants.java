@@ -245,7 +245,7 @@ public static final class Mod3 {
   public static double shooterAmpSpeed = 0.15;
   public static double shooterSpeedThreshold = 0.02;
   public static double intakeShootSpeed = 1.0;
-  public static double intakeIntakeSpeed = 0.4;
+  public static double intakeIntakeSpeed = 0.75;
   public static double spinupDurationMS = 2000.0; // Milliseconds
   public static double fireDurationMS = 500.0; // Milliseconds
 
