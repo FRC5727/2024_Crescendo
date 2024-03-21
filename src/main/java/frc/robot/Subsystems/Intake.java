@@ -35,6 +35,7 @@ public class Intake extends SubsystemBase {
   private CANcoder encoder;
   private IntakePosition targetPosition;
   private DigitalInput sensor; // Detects presence of ring
+  private DigitalInput motorSideSensor;
   private DigitalInput intakeLimit; // Detects hitting floor
   private DigitalInput feedLimit; // Detects hitting back of robot
   private PositionVoltage anglePosition = new PositionVoltage(0);
@@ -46,6 +47,7 @@ public class Intake extends SubsystemBase {
     shootMotor = new TalonFX(Constants.intakePullMotorPort);
     encoder = new CANcoder(Constants.intakeEncoderPort);
     sensor = new DigitalInput(Constants.intakeSensorPort);
+    motorSideSensor = new DigitalInput(Constants.intakeMotorSideSensorPort);
     intakeLimit = new DigitalInput(Constants.intakeLimitPort);
     feedLimit = new DigitalInput(Constants.feedLimitPort);
     //aimMotor.getConfigurator().apply(Robot.ctreConfigs.intakeAimFXConfig);
@@ -107,7 +109,7 @@ switch (position)
   }
   public boolean containsNote()
   {
-    return !sensor.get(); // Inverted I guess
+    return !(sensor.get() || motorSideSensor.get());
   }
   @Override
   public void periodic()

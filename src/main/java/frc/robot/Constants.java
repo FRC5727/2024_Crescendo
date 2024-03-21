@@ -238,6 +238,7 @@ public static final class Mod3 {
   public static int intakePullMotorPort = 13;
   public static int intakeEncoderPort = 4;
   public static int intakeSensorPort = 0;
+  public static int intakeMotorSideSensorPort = 5;
   public static int intakeLimitPort = 9;
   public static int feedLimitPort = 4;
 
