@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.0138248847926272,
-        "y": 4.265902246090207
+        "x": 0.7646141006567733,
+        "y": 4.41249682499365
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.4262122575767409,
-        "y": 4.228412484928018
+        "x": 1.1770014734408871,
+        "y": 4.375007063831461
       },
       "isLocked": false,
       "linkedName": null
@@ -32,48 +32,48 @@
     },
     {
       "anchor": {
-        "x": 1.0138248847926272,
-        "y": 4.265902246090207
+        "x": 0.9551870532312499,
+        "y": 4.031350919844697
       },
       "prevControl": {
-        "x": 1.2483762110381367,
-        "y": 4.251242788199864
+        "x": 1.1897383794767595,
+        "y": 4.016691461954354
       },
       "nextControl": {
-        "x": 0.03272497929098084,
-        "y": 4.327220990184058
+        "x": -0.025912852270396525,
+        "y": 4.092669663938548
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.713197140679996,
-        "y": 0.7769512681882514
+        "x": 7.610580935447585,
+        "y": 0.9088863892013505
       },
       "prevControl": {
-        "x": 8.09434304582895,
-        "y": 0.8209296418592847
+        "x": 7.991726840596539,
+        "y": 0.9528647628723838
       },
       "nextControl": {
-        "x": 6.622471640866263,
-        "y": 0.6510983259020519
+        "x": 6.519855435633852,
+        "y": 0.7830334469151509
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.0138248847926272,
-        "y": 4.265902246090207
+        "x": 0.9551870532312499,
+        "y": 4.031350919844697
       },
       "prevControl": {
-        "x": 1.9057704564981521,
-        "y": 4.131390267244821
+        "x": 1.8471326249367728,
+        "y": 3.8968389409993103
       },
       "nextControl": {
-        "x": 0.12187931308710365,
-        "y": 4.400414224935593
+        "x": 0.06324148152572628,
+        "y": 4.165862898690083
       },
       "isLocked": false,
       "linkedName": null
@@ -112,12 +112,12 @@
     },
     {
       "anchor": {
-        "x": 1.0138248847926272,
-        "y": 4.265902246090207
+        "x": 0.9551870532312499,
+        "y": 4.031350919844697
       },
       "prevControl": {
-        "x": 1.3253383649624377,
-        "y": 4.049675242207628
+        "x": 1.26670053340106,
+        "y": 3.8151239159621175
       },
       "nextControl": null,
       "isLocked": false,
@@ -127,32 +127,32 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": 180.0,
+      "rotationDegrees": 0.0,
       "rotateFast": false
     },
     {
       "waypointRelativePos": 2,
-      "rotationDegrees": 120.0,
+      "rotationDegrees": -60.0,
       "rotateFast": false
     },
     {
       "waypointRelativePos": 4,
-      "rotationDegrees": 124.50852298766843,
+      "rotationDegrees": -60.0,
       "rotateFast": false
     },
     {
       "waypointRelativePos": 5,
-      "rotationDegrees": -160.0,
+      "rotationDegrees": 30.0,
       "rotateFast": false
     },
     {
       "waypointRelativePos": 7,
-      "rotationDegrees": 120.0,
+      "rotationDegrees": -60.0,
       "rotateFast": false
     },
     {
       "waypointRelativePos": 3,
-      "rotationDegrees": 170.0,
+      "rotationDegrees": -20.0,
       "rotateFast": false
     }
   ],
@@ -200,7 +200,7 @@
     },
     {
       "name": "Shoot 1st Ring",
-      "waypointRelativePos": 0.0,
+      "waypointRelativePos": 0.25,
       "command": {
         "type": "parallel",
         "data": {
@@ -297,20 +297,20 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.0,
+    "maxVelocity": 4.5,
     "maxAcceleration": 5.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 120.0,
+    "rotation": -60.0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "4 Ring Autos",
   "previewStartingState": {
-    "rotation": 120.0,
+    "rotation": -60.0,
     "velocity": 0
   },
   "useDefaultConstraints": false
