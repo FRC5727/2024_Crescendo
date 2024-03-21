@@ -1,0 +1,349 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.0578032584636603,
+        "y": 4.353858993432273
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.7761166950905336,
+        "y": 4.295221161870895
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.289197721252586,
+        "y": 4.148626582967452
+      },
+      "prevControl": {
+        "x": 1.497586995173991,
+        "y": 4.500453572335717
+      },
+      "nextControl": {
+        "x": 2.8925621486760726,
+        "y": 3.88046461522368
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.0578032584636603,
+        "y": 4.353858993432273
+      },
+      "prevControl": {
+        "x": 0.8504009295965027,
+        "y": 4.882744747632352
+      },
+      "nextControl": {
+        "x": 1.2652055873308186,
+        "y": 3.824973239232193
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.9457164628614976,
+        "y": 2.2575565151130306
+      },
+      "prevControl": {
+        "x": 2.4672877551231083,
+        "y": 2.8436803971738773
+      },
+      "nextControl": {
+        "x": 5.424145170599887,
+        "y": 1.6714326330521838
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.757175514351029,
+        "y": 0.8209296418592844
+      },
+      "prevControl": {
+        "x": 7.113940660779254,
+        "y": 1.5631237036728702
+      },
+      "nextControl": {
+        "x": 8.328894372074462,
+        "y": 0.16125403679378847
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.0578032584636603,
+        "y": 4.353858993432273
+      },
+      "prevControl": {
+        "x": 0.30679590265430634,
+        "y": 4.545290898617511
+      },
+      "nextControl": {
+        "x": 1.8088106142730176,
+        "y": 4.162427088247035
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.520592184041511,
+        "y": 3.269059109546791
+      },
+      "prevControl": {
+        "x": 2.8495976813382193,
+        "y": 3.513688813091912
+      },
+      "nextControl": {
+        "x": 4.191586686744799,
+        "y": 3.02442940600167
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.675532493922131,
+        "y": 3.7528212199281548
+      },
+      "prevControl": {
+        "x": 5.098249120814875,
+        "y": 3.6532896038751796
+      },
+      "nextControl": {
+        "x": 6.100656772742118,
+        "y": 3.8261185093798766
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.654559309118619,
+        "y": 2.4627889255778523
+      },
+      "prevControl": {
+        "x": 6.654559309118619,
+        "y": 2.4627889255778523
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": 120.0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": 180.0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 2,
+      "rotationDegrees": 120.0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 4.0,
+      "rotationDegrees": 180.0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 5.0,
+      "rotationDegrees": 120.0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 6.0,
+      "rotationDegrees": 180.0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 6.0,
+      "rotationDegrees": 180.0,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "Shoot 2nd Ring",
+      "waypointRelativePos": 1.9,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Shoot"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Shoot 1st Ring",
+      "waypointRelativePos": 0.25,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Shoot"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Intake pos and intake 2nd ring",
+      "waypointRelativePos": 0.9,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake Pos"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Intake 4th Ring",
+      "waypointRelativePos": 8.0,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake Pos"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Intake 3rd Ring",
+      "waypointRelativePos": 4.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Shoot 3rd Ring",
+      "waypointRelativePos": 4.9,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Shoot"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Intake pos 3rd Ring",
+      "waypointRelativePos": 4.2,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake Pos"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Intaking 4th Ring",
+      "waypointRelativePos": 7.2,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake Pos"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 180.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "4 Ring Autos",
+  "previewStartingState": {
+    "rotation": 120.0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

@@ -3,7 +3,9 @@
   "robotLength": 0.89,
   "holonomicMode": true,
   "pathFolders": [
-    "New Folder"
+    "4 Ring Autos",
+    "New New Folder",
+    "New New New Folder"
   ],
   "autoFolders": [
     "New Folder"
