@@ -20,12 +20,12 @@
         "y": 4.148626582967452
       },
       "prevControl": {
-        "x": 1.497586995173991,
-        "y": 4.500453572335717
+        "x": 1.087122174244349,
+        "y": 4.339199535541929
       },
       "nextControl": {
-        "x": 2.8925621486760726,
-        "y": 3.88046461522368
+        "x": 2.4924150491460075,
+        "y": 4.116409201716056
       },
       "isLocked": false,
       "linkedName": null
@@ -52,12 +52,12 @@
         "y": 2.2575565151130306
       },
       "prevControl": {
-        "x": 2.4672877551231083,
-        "y": 2.8436803971738773
+        "x": 2.6850030842918833,
+        "y": 2.7559780833847385
       },
       "nextControl": {
-        "x": 5.424145170599887,
-        "y": 1.6714326330521838
+        "x": 4.97143709866609,
+        "y": 1.8520390544460987
       },
       "isLocked": false,
       "linkedName": null
@@ -68,44 +68,44 @@
         "y": 0.8209296418592844
       },
       "prevControl": {
-        "x": 7.113940660779254,
-        "y": 1.5631237036728702
+        "x": 7.566602561776552,
+        "y": 1.627199825828224
       },
       "nextControl": {
-        "x": 8.328894372074462,
-        "y": 0.16125403679378847
+        "x": 7.9079781057529885,
+        "y": 0.18291867823560826
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.0578032584636603,
-        "y": 4.353858993432273
+        "x": 1.1604194636960707,
+        "y": 4.148626582967452
       },
       "prevControl": {
-        "x": 0.30679590265430634,
-        "y": 4.545290898617511
+        "x": 1.1604194636960707,
+        "y": 3.5182698936826453
       },
       "nextControl": {
-        "x": 1.8088106142730176,
-        "y": 4.162427088247035
+        "x": 1.1604194636960707,
+        "y": 4.661498145546103
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.520592184041511,
-        "y": 3.269059109546791
+        "x": 3.5499110998222,
+        "y": 3.1078050727530036
       },
       "prevControl": {
-        "x": 2.8495976813382193,
-        "y": 3.513688813091912
+        "x": 2.890235494756704,
+        "y": 3.1811023622047245
       },
       "nextControl": {
-        "x": 4.191586686744799,
-        "y": 3.02442940600167
+        "x": 4.259739853437853,
+        "y": 3.028935211240154
       },
       "isLocked": false,
       "linkedName": null
@@ -113,27 +113,75 @@
     {
       "anchor": {
         "x": 5.675532493922131,
-        "y": 3.7528212199281548
+        "y": 3.899415798831598
       },
       "prevControl": {
         "x": 5.098249120814875,
-        "y": 3.6532896038751796
+        "y": 3.799884182778623
       },
       "nextControl": {
         "x": 6.100656772742118,
-        "y": 3.8261185093798766
+        "y": 3.97271308828332
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.654559309118619,
-        "y": 2.4627889255778523
+        "x": 7.639899851228273,
+        "y": 2.5214267571392286
       },
       "prevControl": {
-        "x": 6.654559309118619,
-        "y": 2.4627889255778523
+        "x": 7.771834972241374,
+        "y": 3.06382669908197
+      },
+      "nextControl": {
+        "x": 7.545774935681578,
+        "y": 2.134468771002819
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.499618999237999,
+        "y": 3.899415798831598
+      },
+      "prevControl": {
+        "x": 5.829132250780954,
+        "y": 4.067677884725873
+      },
+      "nextControl": {
+        "x": 4.12162995754563,
+        "y": 3.1957618200950693
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.5499110998222,
+        "y": 3.1078050727530036
+      },
+      "prevControl": {
+        "x": 4.165668973817803,
+        "y": 3.0959635751761656
+      },
+      "nextControl": {
+        "x": 2.787619289524294,
+        "y": 3.1224645306433474
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.1604194636960707,
+        "y": 4.148626582967452
+      },
+      "prevControl": {
+        "x": 0.16041946369607074,
+        "y": 4.148626582967452
       },
       "nextControl": null,
       "isLocked": false,
@@ -143,37 +191,52 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0,
-      "rotationDegrees": 120.0,
+      "rotationDegrees": -60.0,
       "rotateFast": false
     },
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": 180.0,
+      "rotationDegrees": 0.0,
       "rotateFast": false
     },
     {
       "waypointRelativePos": 2,
-      "rotationDegrees": 120.0,
+      "rotationDegrees": -60.0,
       "rotateFast": false
     },
     {
       "waypointRelativePos": 4.0,
-      "rotationDegrees": 180.0,
+      "rotationDegrees": 0.0,
       "rotateFast": false
     },
     {
       "waypointRelativePos": 5.0,
-      "rotationDegrees": 120.0,
+      "rotationDegrees": -60.0,
       "rotateFast": false
     },
     {
       "waypointRelativePos": 6.0,
-      "rotationDegrees": 180.0,
+      "rotationDegrees": 0.0,
       "rotateFast": false
     },
     {
       "waypointRelativePos": 6.0,
-      "rotationDegrees": 180.0,
+      "rotationDegrees": 0.0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 8,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 9,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 10,
+      "rotationDegrees": 0,
       "rotateFast": false
     }
   ],
@@ -238,7 +301,7 @@
     },
     {
       "name": "Intake 4th Ring",
-      "waypointRelativePos": 8.0,
+      "waypointRelativePos": 11.0,
       "command": {
         "type": "sequential",
         "data": {
@@ -311,8 +374,8 @@
       }
     },
     {
-      "name": "Intaking 4th Ring",
-      "waypointRelativePos": 7.2,
+      "name": "Intake 4th Ring",
+      "waypointRelativePos": 7.4,
       "command": {
         "type": "parallel",
         "data": {
@@ -336,14 +399,14 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0,
+    "rotation": -60.0,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "4 Ring Autos",
   "previewStartingState": {
-    "rotation": 120.0,
+    "rotation": -60.0,
     "velocity": 0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

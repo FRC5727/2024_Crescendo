@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 2.333176094923619,
-        "y": 4.133967125077108
+        "x": 2.245219347581553,
+        "y": 4.031350919844697
       },
       "prevControl": {
-        "x": 2.1111505189965145,
-        "y": 4.138156286886972
+        "x": 1.6002032004064013,
+        "y": 4.148626582967451
       },
       "nextControl": {
-        "x": 2.3334525900368535,
-        "y": 4.133961908188179
+        "x": 2.245491431221521,
+        "y": 4.031301450091975
       },
       "isLocked": false,
       "linkedName": null
@@ -52,12 +52,12 @@
         "y": 0.9088863892013505
       },
       "prevControl": {
-        "x": 7.991726840596539,
-        "y": 0.9528647628723838
+        "x": 7.980966474521451,
+        "y": 1.0089905889510442
       },
       "nextControl": {
-        "x": 6.519855435633852,
-        "y": 0.7830334469151509
+        "x": 6.525781051562102,
+        "y": 0.6156972313944631
       },
       "isLocked": false,
       "linkedName": null
@@ -80,16 +80,32 @@
     },
     {
       "anchor": {
-        "x": 7.713197140679996,
-        "y": 2.198918683551653
+        "x": 3.4912732682608225,
+        "y": 2.330853804564752
       },
       "prevControl": {
-        "x": 3.9750353786421866,
-        "y": 0.9088863892013505
+        "x": 1.931536427267898,
+        "y": 2.806983998131012
       },
       "nextControl": {
-        "x": 7.730686822880867,
-        "y": 2.2049543385856794
+        "x": 4.883921767843536,
+        "y": 1.9057295257447668
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.610580935447585,
+        "y": 2.066983562538554
+      },
+      "prevControl": {
+        "x": 4.7373271889400925,
+        "y": 1.759134946841323
+      },
+      "nextControl": {
+        "x": 7.628977485178203,
+        "y": 2.0689546214382633
       },
       "isLocked": false,
       "linkedName": null
@@ -141,12 +157,12 @@
       "rotateFast": false
     },
     {
-      "waypointRelativePos": 5,
+      "waypointRelativePos": 6.0,
       "rotationDegrees": 30.0,
       "rotateFast": false
     },
     {
-      "waypointRelativePos": 7,
+      "waypointRelativePos": 8.0,
       "rotationDegrees": -60.0,
       "rotateFast": false
     },
@@ -154,6 +170,11 @@
       "waypointRelativePos": 3,
       "rotationDegrees": -20.0,
       "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 5,
+      "rotationDegrees": 10.0,
+      "rotateFast": true
     }
   ],
   "constraintZones": [],
@@ -257,7 +278,7 @@
     },
     {
       "name": "Shoot 4th Ring",
-      "waypointRelativePos": 7,
+      "waypointRelativePos": 8.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -274,7 +295,7 @@
     },
     {
       "name": "Intake Pos and Intake 4th Ring",
-      "waypointRelativePos": 5.0,
+      "waypointRelativePos": 6.0,
       "command": {
         "type": "sequential",
         "data": {
