@@ -109,7 +109,7 @@ switch (position)
   }
   public boolean containsNote()
   {
-    return !(sensor.get() || motorSideSensor.get());
+    return !(sensor.get() || motorSideSensor.get()); //Two sensors, containsnote when either are active//
   }
   @Override
   public void periodic()
