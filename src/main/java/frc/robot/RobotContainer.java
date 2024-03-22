@@ -205,8 +205,8 @@ Command twoRings =
     Trigger driverLeftTrigger = new Trigger(() -> Controls.driver.getLeftTriggerAxis() > Controls.triggerAxisThreshold);
     Trigger driverRightTrigger = new Trigger(() -> Controls.driver.getRightTriggerAxis() > Controls.triggerAxisThreshold);
   
-    driverLeftTrigger.whileTrue(new GroundIntakeCommand(s_Intake));
-    driverRightTrigger.whileTrue(new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed));
+    driverLeftTrigger.whileTrue(new GroundIntakeCommand(s_Intake).andThen(Commands.runOnce(()->s_Intake.moveTo(IntakePosition.feed), s_Intake)));
+    driverRightTrigger.whileTrue(new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed).andThen(Commands.runOnce(()->s_Intake.moveTo(IntakePosition.intake), s_Intake)));
     driverRightBumper.whileTrue(new ShootCommand(s_Intake, s_Shooter, Constants.shooterAmpSpeed));
 
     /*
