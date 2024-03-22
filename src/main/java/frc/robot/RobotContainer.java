@@ -62,7 +62,7 @@ public class RobotContainer {
   private final Shooter s_Shooter = new Shooter();
 //  private final ClimberCommand climberCommand;
 //  private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
-private final Auto auto = new Auto();//s_Swerve, s_RobotPosition);
+// private final Auto auto = new Auto();//s_Swerve, s_RobotPosition);
 SendableChooser<Command> simpleAutoChooser;
 private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
 
@@ -132,20 +132,31 @@ Command twoRings =
       );
 
     // Move a little, then shoot, then move more, then stop
-    Command oneRing =
+    Command oneRingL =
       moveDistance(.240, 0, 0.240)
       .andThen(
         stopSwerve())
       .andThen(Commands.waitSeconds(0.5))
       .andThen(
         new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed))
-      .andThen(moveDistance(1.5, 0, 3)
+      .andThen(moveDistance(1.5, 1.5, 3)
+          .andThen(Commands.waitSeconds(0.01))
+          .andThen(stopSwerve()));
+    Command oneRingR =
+      moveDistance(.240, 0, 0.240)
+      .andThen(
+        stopSwerve())
+      .andThen(Commands.waitSeconds(0.5))
+      .andThen(
+        new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed))
+      .andThen(moveDistance(1.5, -1.5, 3)
           .andThen(Commands.waitSeconds(0.01))
           .andThen(stopSwerve()));
 
-    simpleAutoChooser.addOption("One note", oneRing);
+    simpleAutoChooser.addOption("One note (left)", oneRingL);
+    simpleAutoChooser.addOption("One note (right)", oneRingR);
     simpleAutoChooser.addOption("Two notes", twoRings);
-    // SmartDashboard.putData("Auto", simpleAutoChooser);
+    SmartDashboard.putData("Auto", simpleAutoChooser);
     // Easy way to test AutoBalance
     //SmartDashboard.putData("Auto-Balance", new AutoBalanceCommand(s_Swerve, s_LED));
   }
@@ -168,8 +179,8 @@ Command twoRings =
     // Shoot, then intake while driving forward for 2 seconds,
     // then move to feed while driving backward for 2 seconds,
     // then stop and shoot
-    return auto.getAutoCommand(s_Swerve);
-    // return simpleAutoChooser.getSelected();
+    //return auto.getAutoCommand(s_Swerve);
+    return simpleAutoChooser.getSelected();
   }
 
   /*
