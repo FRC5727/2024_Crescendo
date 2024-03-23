@@ -62,7 +62,7 @@ public class RobotContainer {
   private final Shooter s_Shooter = new Shooter();
 //  private final ClimberCommand climberCommand;
 //  private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
-// private final Auto auto = new Auto();//s_Swerve, s_RobotPosition);
+ private final Auto auto = new Auto();//s_Swerve, s_RobotPosition);
 SendableChooser<Command> simpleAutoChooser;
 private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
 
@@ -96,7 +96,7 @@ NamedCommands.registerCommand("Shoot Amp", new ShootCommand(s_Intake, s_Shooter,
 NamedCommands.registerCommand("Intake", new GroundIntakeCommand(s_Intake)); //Intake
 NamedCommands.registerCommand("Load", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed))); // Get in Shooter Position
 NamedCommands.registerCommand("Intake Pos", Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.intake))); // Get in Intake Position*/
-NamedCommands.registerCommand("Wait", new WaitCommand(0.01)); //Wait, Josie
+NamedCommands.registerCommand("Wait", new WaitCommand(1.00)); //Wait, Josie
 
    new JoystickButton(Controls.driver, XboxController.Button.kBack.value)
     .onTrue(Commands.runOnce(() -> s_Swerve.zeroHeading()));
@@ -106,7 +106,7 @@ NamedCommands.registerCommand("Wait", new WaitCommand(0.01)); //Wait, Josie
 //    for (Position pos : Position.values()) {
 //      positionChooser.addOption(pos.toString(), pos);
 //    }
-//    SmartDashboard.putData("Position chooser", positionChooser);
+//   SmartDashboard.putData("Position chooser", positionChooser);
 
 simpleAutoChooser = new SendableChooser<Command>();
 
@@ -132,14 +132,15 @@ Command twoRings =
       );
 
     // Move a little, then shoot, then move more, then stop
-    Command oneRingL =
+    Command oneRing =
       moveDistance(.240, 0, 0.240)
       .andThen(
         stopSwerve())
       .andThen(Commands.waitSeconds(0.5))
       .andThen(
         new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed))
-      .andThen(moveDistance(1.5, 1.5, 3)
+      .andThen(moveDistance(1.5, 0, 3))
+       /*  .andThen(moveDistance(1.5, 1.5, 3)
           .andThen(Commands.waitSeconds(0.01))
           .andThen(stopSwerve()));
     Command oneRingR =
@@ -148,15 +149,15 @@ Command twoRings =
         stopSwerve())
       .andThen(Commands.waitSeconds(0.5))
       .andThen(
-        new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed))
+        new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed))*/
       .andThen(moveDistance(1.5, -1.5, 3)
           .andThen(Commands.waitSeconds(0.01))
           .andThen(stopSwerve()));
-
-    simpleAutoChooser.addOption("One note (left)", oneRingL);
-    simpleAutoChooser.addOption("One note (right)", oneRingR);
+          simpleAutoChooser.addOption("One note", oneRing);
+    //simpleAutoChooser.addOption("One note (left)", oneRing);
+    //simpleAutoChooser.addOption("One note (right)", oneRing);
     simpleAutoChooser.addOption("Two notes", twoRings);
-    SmartDashboard.putData("Auto", simpleAutoChooser);
+    //SmartDashboard.putData("Auto", simpleAutoChooser);
     // Easy way to test AutoBalance
     //SmartDashboard.putData("Auto-Balance", new AutoBalanceCommand(s_Swerve, s_LED));
   }
@@ -172,16 +173,17 @@ Command twoRings =
     return Commands.runOnce(
       () -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false), s_Swerve);
   }
-  public Command getAutonomousCommand() {
-//    return new PathPlannerAuto("New Auto");//auto.getAutoCommand();
-//   return auto.getAutoCommand();
+ public Command getAutonomousCommand() {
+    //return new PathPlannerAuto("New Auto");//auto.getAutoCommand();
+//  return auto.getAutoCommand();
 
     // Shoot, then intake while driving forward for 2 seconds,
     // then move to feed while driving backward for 2 seconds,
     // then stop and shoot
-    //return auto.getAutoCommand(s_Swerve);
-    return simpleAutoChooser.getSelected();
-  }
+   return auto.getAutoCommand(s_Swerve);
+    //return simpleAutoChooser.getSelected();
+  
+ }
 
   /*
    * Use this method to define your trigger->command mappings. Triggers can be
