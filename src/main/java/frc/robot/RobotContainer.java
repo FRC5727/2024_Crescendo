@@ -153,11 +153,12 @@ Command twoRings =
       .andThen(moveDistance(1.5, -1.5, 3)
           .andThen(Commands.waitSeconds(0.01))
           .andThen(stopSwerve()));
-          simpleAutoChooser.addOption("One note", oneRing);
+    simpleAutoChooser.addOption("One note", oneRing);
     //simpleAutoChooser.addOption("One note (left)", oneRing);
     //simpleAutoChooser.addOption("One note (right)", oneRing);
     simpleAutoChooser.addOption("Two notes", twoRings);
-    //SmartDashboard.putData("Auto", simpleAutoChooser);
+    simpleAutoChooser.addOption("None (use pathplanner)", null);
+    SmartDashboard.putData("Old Auto", simpleAutoChooser);
     // Easy way to test AutoBalance
     //SmartDashboard.putData("Auto-Balance", new AutoBalanceCommand(s_Swerve, s_LED));
   }
@@ -180,9 +181,10 @@ Command twoRings =
     // Shoot, then intake while driving forward for 2 seconds,
     // then move to feed while driving backward for 2 seconds,
     // then stop and shoot
-   return auto.getAutoCommand(s_Swerve);
-    //return simpleAutoChooser.getSelected();
-  
+   if (simpleAutoChooser.getSelected() == null)
+    return auto.getAutoCommand(s_Swerve);
+   else
+    return simpleAutoChooser.getSelected();
  }
 
   /*
