@@ -6,11 +6,14 @@ package frc.robot.Subsystems;
 
 import java.util.ResourceBundle.Control;
 
+import com.ctre.phoenix6.configs.CANcoderConfiguration;
+import com.ctre.phoenix6.configs.MagnetSensorConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -54,6 +57,10 @@ public class Intake extends SubsystemBase {
     //encoder.getConfigurator().apply(Robot.ctreConfigs.intakeAimCANcoderConfig);// Don't know how to put in CTRE config yet)
     //aimMotor.getConfigurator().setPosition(0.0);
     aimMotor.setNeutralMode(NeutralModeValue.Brake);
+
+    MagnetSensorConfigs c = new MagnetSensorConfigs();
+    c.AbsoluteSensorRange = AbsoluteSensorRangeValue.Unsigned_0To1;
+    encoder.getConfigurator().apply(c);
     resetPosition();
   }
 
@@ -79,7 +86,7 @@ switch (position)
       case fireSpeaker: // Move to firing position for speaker
         return Constants.intakeAngles.fireSpeaker;*/
       default:
-        return 0;
+        return 10; // So we'll never reach it
     }
   }
   public void moveTo(IntakePosition position)
@@ -95,12 +102,12 @@ switch (position)
   }
   public IntakePosition getPosition() // Which position the intake is currently in
   {
-    if (intakeLimit.get()) return IntakePosition.intake;
-    if (feedLimit.get()) return IntakePosition.feed;
-    /*
+    // if (intakeLimit.get()) return IntakePosition.intake;
+    // if (feedLimit.get()) return IntakePosition.feed;
+    
     for (IntakePosition position: IntakePosition.values())
-    if (Math.abs(encoder.getAbsolutePosition().getValue() - getAngleFor(position)) < Constants.IntakeAim.threshold)
-      return position;*/
+    if (distanceAngles(encoder.getAbsolutePosition().getValue(), getAngleFor(position)) < Constants.IntakeAim.threshold)
+      return position;
     return IntakePosition.none;
   }
   public double getAimSpeed()
@@ -111,17 +118,24 @@ switch (position)
   {
     return !(sensor.get() || motorSideSensor.get()); //Two sensors, containsnote when either are active//
   }
+  public static double distanceAngles(double a, double b)
+  {
+    return Math.min(Math.abs(a - b), 1 - Math.abs(a - b));
+  }
+
   @Override
   public void periodic()
   {
     SmartDashboard.putNumber("Intake angle: ", encoder.getAbsolutePosition().getValue());
-    SmartDashboard.putString("Nearest intake position: ", getPosition().name());
+    SmartDashboard.putString("Intake position: ", getPosition().name());
     SmartDashboard.putBoolean("Note loaded: ", containsNote());
     SmartDashboard.putBoolean("Rear limit switch: ", feedLimit.get());
     SmartDashboard.putBoolean("Forward limit switch: ", intakeLimit.get());
-    if (intakeLimit.get() && targetPosition == IntakePosition.intake)
+    if ((getPosition() == IntakePosition.intake || intakeLimit.get())
+      && targetPosition == IntakePosition.intake)
       aimMotor.stopMotor();
-    if (feedLimit.get() && targetPosition == IntakePosition.feed)
+    if ((getPosition() == IntakePosition.feedee || feedLimit.get())
+      && targetPosition == IntakePosition.feed)
       aimMotor.stopMotor();
     // This method will be called once per scheduler run
   }
