@@ -27,12 +27,9 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Intake.IntakePosition;
-import frc.robot.oldcommands.*;
 //import frc.robot.oldsubsystems.ArmSubsystem;
 //import frc.robot.oldsubsystems.IntakeSubsystem;
 //import frc.robot.oldsubsystems.LED;
-import frc.robot.oldsubsystems.RobotPosition;
-import frc.robot.oldsubsystems.TimerSubsystem;
 //import frc.robot.oldsubsystems.ArmSubsystem.Position;
 
 import static frc.robot.Constants.*;
@@ -64,7 +61,7 @@ public class RobotContainer {
 //  private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
  private final Auto auto = new Auto();//s_Swerve, s_RobotPosition);
 SendableChooser<Command> simpleAutoChooser;
-private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
+// private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
 
 //  private Position driverTargetPosition = Position.CHASSIS;
 
