@@ -27,9 +27,12 @@ import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Swerve;
 import frc.robot.Subsystems.Intake.IntakePosition;
+import frc.robot.oldcommands.*;
 //import frc.robot.oldsubsystems.ArmSubsystem;
 //import frc.robot.oldsubsystems.IntakeSubsystem;
 //import frc.robot.oldsubsystems.LED;
+import frc.robot.oldsubsystems.RobotPosition;
+import frc.robot.oldsubsystems.TimerSubsystem;
 //import frc.robot.oldsubsystems.ArmSubsystem.Position;
 
 import static frc.robot.Constants.*;
@@ -61,7 +64,7 @@ public class RobotContainer {
 //  private final RobotPosition s_RobotPosition = new RobotPosition(s_Swerve);
  private final Auto auto = new Auto();//s_Swerve, s_RobotPosition);
 SendableChooser<Command> simpleAutoChooser;
-// private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
+private final @SuppressWarnings("unused") TimerSubsystem timerSubsystem = new TimerSubsystem();
 
 //  private Position driverTargetPosition = Position.CHASSIS;
 
@@ -150,12 +153,11 @@ Command twoRings =
       .andThen(moveDistance(1.5, -1.5, 3)
           .andThen(Commands.waitSeconds(0.01))
           .andThen(stopSwerve()));
-    simpleAutoChooser.addOption("One note", oneRing);
+          simpleAutoChooser.addOption("One note", oneRing);
     //simpleAutoChooser.addOption("One note (left)", oneRing);
     //simpleAutoChooser.addOption("One note (right)", oneRing);
     simpleAutoChooser.addOption("Two notes", twoRings);
-    simpleAutoChooser.addOption("None (use pathplanner)", null);
-    SmartDashboard.putData("Old Auto", simpleAutoChooser);
+    //SmartDashboard.putData("Auto", simpleAutoChooser);
     // Easy way to test AutoBalance
     //SmartDashboard.putData("Auto-Balance", new AutoBalanceCommand(s_Swerve, s_LED));
   }
@@ -178,10 +180,9 @@ Command twoRings =
     // Shoot, then intake while driving forward for 2 seconds,
     // then move to feed while driving backward for 2 seconds,
     // then stop and shoot
-   if (simpleAutoChooser.getSelected() == null)
-    return auto.getAutoCommand(s_Swerve);
-   else
-    return simpleAutoChooser.getSelected();
+   return auto.getAutoCommand(s_Swerve);
+    //return simpleAutoChooser.getSelected();
+  
  }
 
   /*
