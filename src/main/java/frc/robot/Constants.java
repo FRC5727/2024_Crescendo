@@ -75,12 +75,12 @@ public final class Constants {
 
         /* Swerve Current Limiting */
         public static final int angleCurrentLimit = 25;
-        public static final int angleCurrentThreshold = 40;
+        public static final int angleCurrentThreshold = 60;
         public static final double angleCurrentThresholdTime = 0.1;
         public static final boolean angleEnableCurrentLimit = true;
 
         public static final int driveCurrentLimit = 35;
-        public static final int driveCurrentThreshold = 60;
+        public static final int driveCurrentThreshold = 40;//Miah
         public static final double driveCurrentThresholdTime = 0.1;
         public static final boolean driveEnableCurrentLimit = true;
 
@@ -245,8 +245,8 @@ public static final class Mod3 {
   public static double shooterSpeakerSpeed = 1.0;
   public static double shooterAmpSpeed = 0.15;
   public static double shooterSpeedThreshold = 0.02;
-  public static double intakeShootSpeed = 1.0;
-  public static double intakeIntakeSpeed = 0.75;
+  public static double intakeShootSpeed = 1.00;
+  public static double intakeIntakeSpeed = 0.5;
   public static double spinupDurationMS = 2000.0; // Milliseconds
   public static double fireDurationMS = 500.0; // Milliseconds
 
@@ -266,14 +266,14 @@ public static final class Mod3 {
 
     // Not using above PID For now
 
-    public static final double speed = 0.30;
+    public static final double speed = 0.10;
   }
 
   public static class intakeAngles
   {
-    public static double intake = -0.02;
-    public static double feed = 0.489932;
-    public static double fireAmp = 0.0;
+    public static double intake = 0.992676;
+    public static double feed = 0.491699;
+//    public static double fireAmp = 0.0;
  //   public static double fireSpeaker = 0.0;
   }
 

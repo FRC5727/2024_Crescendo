@@ -120,12 +120,12 @@ Command twoRings =
         new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed))
       .andThen(
         new GroundIntakeCommand(s_Intake)
-        .alongWith(moveDistance(1.5, 0, 3)
+        .alongWith(moveDistance(-1.5, 0, 3)
           .andThen(Commands.waitSeconds(0.01))
           .andThen(stopSwerve())))
       .andThen(
         Commands.runOnce(() -> s_Intake.moveTo(IntakePosition.feed))
-        .alongWith(moveDistance(-1.5, 0, 3)))
+        .alongWith(moveDistance(1.5, 0, 3)))
       .andThen(
         stopSwerve(),
         new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed)
@@ -218,8 +218,8 @@ Command twoRings =
     Trigger driverLeftTrigger = new Trigger(() -> Controls.driver.getLeftTriggerAxis() > Controls.triggerAxisThreshold);
     Trigger driverRightTrigger = new Trigger(() -> Controls.driver.getRightTriggerAxis() > Controls.triggerAxisThreshold);
   
-    driverLeftTrigger.whileTrue(new GroundIntakeCommand(s_Intake).andThen(Commands.runOnce(()->s_Intake.moveTo(IntakePosition.feed), s_Intake)));
-    driverRightTrigger.whileTrue(new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed).andThen(Commands.runOnce(()->s_Intake.moveTo(IntakePosition.intake), s_Intake)));
+    driverLeftTrigger.whileTrue(new GroundIntakeCommand(s_Intake));//.andThen(Commands.runOnce(()->s_Intake.moveTo(IntakePosition.feed), s_Intake)));
+    driverRightTrigger.whileTrue(new ShootCommand(s_Intake, s_Shooter, Constants.shooterSpeakerSpeed));//.andThen(Commands.runOnce(()->s_Intake.moveTo(IntakePosition.intake), s_Intake)));
     driverRightBumper.whileTrue(new ShootCommand(s_Intake, s_Shooter, Constants.shooterAmpSpeed));
 
     /*
