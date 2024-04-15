@@ -22,8 +22,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Subsystems.Swerve;
-import frc.robot.oldcommands.*;
-import frc.robot.oldsubsystems.*;
 
 public class Auto {
     private final SendableChooser<String> pathChooser = new SendableChooser<>();

@@ -244,7 +244,7 @@ public static final class Mod3 {
 
   public static double shooterSpeakerSpeed = 1.0;
   public static double shooterAmpSpeed = 0.15;
-  public static double shooterSpeedThreshold = 0.02;
+  public static double shooterSpeedThreshold = 0.01;
   public static double intakeShootSpeed = 1.00;
   public static double intakeIntakeSpeed = 0.5;
   public static double spinupDurationMS = 2000.0; // Milliseconds
@@ -255,7 +255,7 @@ public static final class Mod3 {
     public static SensorDirectionValue encoderInvert = SensorDirectionValue.CounterClockwise_Positive;
     public static InvertedValue motorInvert = InvertedValue.Clockwise_Positive;
     public static NeutralModeValue neutralMode = NeutralModeValue.Brake;
-    public static double threshold = 0.01; // In rotations
+    public static double threshold = 0.02; // In rotations
     public static double gearRatio = 220.;
 
     public static double currentLimit = 35;
@@ -266,13 +266,13 @@ public static final class Mod3 {
 
     // Not using above PID For now
 
-    public static final double speed = 0.10;
+    public static final double speed = 0.15;
   }
 
   public static class intakeAngles
   {
     public static double intake = 0.992676;
-    public static double feed = 0.491699;
+    public static double feed = 0.472656;
 //    public static double fireAmp = 0.0;
  //   public static double fireSpeaker = 0.0;
   }

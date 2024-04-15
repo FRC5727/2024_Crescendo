@@ -134,7 +134,7 @@ switch (position)
     if ((getPosition() == IntakePosition.intake || intakeLimit.get())
       && targetPosition == IntakePosition.intake)
       aimMotor.stopMotor();
-    if ((getPosition() == IntakePosition.feedee || feedLimit.get())
+    if ((getPosition() == IntakePosition.feed || feedLimit.get())
       && targetPosition == IntakePosition.feed)
       aimMotor.stopMotor();
     // This method will be called once per scheduler run
