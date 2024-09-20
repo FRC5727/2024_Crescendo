@@ -256,7 +256,7 @@ public static final class Mod3 {
     public static InvertedValue motorInvert = InvertedValue.Clockwise_Positive;
     public static NeutralModeValue neutralMode = NeutralModeValue.Brake;
     public static double threshold = 0.02; // In rotations
-    public static double gearRatio = 220.;
+    public static double gearRatio = 35;
 
     public static double currentLimit = 35;
     /*Aim Motor Josie PID */
@@ -266,7 +266,7 @@ public static final class Mod3 {
 
     // Not using above PID For now
 
-    public static final double speed = 0.3;
+    public static final double speed = 0.35;
   }
 
   public static class intakeAngles

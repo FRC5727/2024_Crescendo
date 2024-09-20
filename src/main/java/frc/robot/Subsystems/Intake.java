@@ -94,9 +94,9 @@ switch (position)
     if (getPosition() == position) return; // Don't do if we're already there
     targetPosition = position;
     if (targetPosition == IntakePosition.feed)// encoder.getAbsolutePosition().getValue() < getAngleFor(position))
-      aimMotor.set(Constants.IntakeAim.speed);
-    else if (targetPosition == IntakePosition.intake)// encoder.getAbsolutePosition().getValue() > getAngleFor(position))
       aimMotor.set(-Constants.IntakeAim.speed);
+    else if (targetPosition == IntakePosition.intake)// encoder.getAbsolutePosition().getValue() > getAngleFor(position))
+      aimMotor.set(Constants.IntakeAim.speed);
     else aimMotor.set(0);
     // aimMotor.setControl(anglePosition.withPosition(getAngleFor(position)));
   }
@@ -131,10 +131,10 @@ switch (position)
     SmartDashboard.putBoolean("Note loaded: ", containsNote());
     SmartDashboard.putBoolean("Rear limit switch: ", feedLimit.get());
     SmartDashboard.putBoolean("Forward limit switch: ", intakeLimit.get());
-    if ((getPosition() == IntakePosition.intake || intakeLimit.get())
+    if ((getPosition() == IntakePosition.intake)
       && targetPosition == IntakePosition.intake)
       aimMotor.stopMotor();
-    if ((getPosition() == IntakePosition.feed || feedLimit.get())
+    if ((getPosition() == IntakePosition.feed)
       && targetPosition == IntakePosition.feed)
       aimMotor.stopMotor();
     // This method will be called once per scheduler run
